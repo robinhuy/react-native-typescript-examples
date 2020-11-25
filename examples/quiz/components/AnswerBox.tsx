@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native';
 
+const BUTTON_BG_COLOR = ['#2c70ad', '#3d9ea6', '#eea928', '#d4546c'];
+
 interface Answer {
   key: string;
   content: string;
@@ -25,7 +27,8 @@ const AnswerBox: React.FunctionComponent<AnswerBoxProps> = ({
         key={key}
         onPress={() => checkAnswer(key)}
         style={styles.answerButtonWrapper}>
-        <View style={[styles.answerButton, styles['answerButton' + key]]}>
+        <View
+          style={[styles.answerButton, {backgroundColor: BUTTON_BG_COLOR[i]}]}>
           <Text style={styles.answerText}>{answers[i].content}</Text>
         </View>
       </TouchableHighlight>,
@@ -43,23 +46,11 @@ const styles = StyleSheet.create({
   answerButton: {
     height: '100%',
     justifyContent: 'center',
-    borderColor: '#ffffff',
-  },
-  answerButtonA: {
-    backgroundColor: '#2c70ad',
-  },
-  answerButtonB: {
-    backgroundColor: '#3d9ea6',
-  },
-  answerButtonC: {
-    backgroundColor: '#eea928',
-  },
-  answerButtonD: {
-    backgroundColor: '#d4546c',
+    borderColor: '#fff',
   },
   answerText: {
     fontSize: 20,
-    color: '#ffffff',
+    color: '#fff',
     textAlign: 'center',
   },
 });

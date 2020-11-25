@@ -4,7 +4,7 @@ import {StyleSheet, View, Text} from 'react-native';
 import ProgressBar from './ProgressBar';
 
 interface HeaderProps {
-  currentQuestion: {};
+  currentQuestion: number;
   totalQuestions: number;
   progress: number;
 }

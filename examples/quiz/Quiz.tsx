@@ -7,9 +7,9 @@ import GameScreen from './screens/GameScreen';
 const App = () => {
   const [isPlaying, setPlaying] = useState(false);
 
-  const startGame = (): void => {
+  function startGame() {
     setPlaying(true);
-  };
+  }
 
   return (
     <>

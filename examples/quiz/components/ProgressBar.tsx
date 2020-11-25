@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 interface ProgressBarProps {
-  progress: any;
+  progress: number;
 }
 
 const ProgressBar: React.FunctionComponent<ProgressBarProps> = ({progress}) => {

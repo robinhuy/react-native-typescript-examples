@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 interface QuestionBoxProps {
-  questionContent: any;
+  questionContent: string;
 }
 
 const QuestionBox: React.FunctionComponent<QuestionBoxProps> = ({

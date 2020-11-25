@@ -7,6 +7,7 @@ import AnswerBox from '../components/AnswerBox';
 import ResultModal from '../components/ResultModal';
 
 import {questions} from '../mockdata.json';
+
 const ANSWER_TIME = 10;
 
 const GameScreen: React.FunctionComponent = () => {
@@ -50,6 +51,7 @@ const GameScreen: React.FunctionComponent = () => {
     } else {
       checkAnswer('');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remainingTime]);
 
   const answerTimeProgress = (remainingTime / ANSWER_TIME) * 100;
