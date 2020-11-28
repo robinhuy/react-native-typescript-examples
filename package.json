@@ -10,8 +10,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "native-base": "^2.13.14",
     "react": "16.13.1",
-    "react-native": "0.63.3"
+    "react-native": "0.63.3",
+    "react-native-maps": "0.27.1",
+    "react-native-vector-icons": "^7.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

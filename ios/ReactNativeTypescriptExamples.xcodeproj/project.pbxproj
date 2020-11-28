@@ -19,6 +19,9 @@
 		62F1EA6DC5EBDE56C4E7D8F8 /* libPods-ReactNativeTypescriptExamples-ReactNativeTypescriptExamplesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7E07CCAFBEECF701349CC0 /* libPods-ReactNativeTypescriptExamples-ReactNativeTypescriptExamplesTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9EB04ADF73E093DDA22F483D /* libPods-ReactNativeTypescriptExamples.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5797F5BE7A3D626D0CF79C /* libPods-ReactNativeTypescriptExamples.a */; };
+		CB4BAAD0257206C70099C029 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4BAAC0257206C70099C029 /* FontAwesome5_Brands.ttf */; };
+		CB4BAAD1257206C70099C029 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4BAAC1257206C70099C029 /* FontAwesome5_Regular.ttf */; };
+		CB4BAAD2257206C70099C029 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CB4BAAC2257206C70099C029 /* FontAwesome5_Solid.ttf */; };
 		FB86F025FA4FB70DE5C4061C /* libPods-ReactNativeTypescriptExamples-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 029FE18A0E951B127A384011 /* libPods-ReactNativeTypescriptExamples-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,9 @@
 		955F9B9A63D51F7D2B4FF704 /* Pods-ReactNativeTypescriptExamples-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeTypescriptExamples-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeTypescriptExamples-tvOSTests/Pods-ReactNativeTypescriptExamples-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA758CC8637B0F1F121CCAC3 /* Pods-ReactNativeTypescriptExamples-ReactNativeTypescriptExamplesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeTypescriptExamples-ReactNativeTypescriptExamplesTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeTypescriptExamples-ReactNativeTypescriptExamplesTests/Pods-ReactNativeTypescriptExamples-ReactNativeTypescriptExamplesTests.release.xcconfig"; sourceTree = "<group>"; };
 		B73FFF26FFE8FCEF519650D1 /* Pods-ReactNativeTypescriptExamples-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeTypescriptExamples-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeTypescriptExamples-tvOS/Pods-ReactNativeTypescriptExamples-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CB4BAAC0257206C70099C029 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		CB4BAAC1257206C70099C029 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		CB4BAAC2257206C70099C029 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
 		CB5797F5BE7A3D626D0CF79C /* libPods-ReactNativeTypescriptExamples.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeTypescriptExamples.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -161,7 +167,6 @@
 				F53F15DF8670C7562DF9B2DA /* Pods-ReactNativeTypescriptExamples-tvOSTests.debug.xcconfig */,
 				955F9B9A63D51F7D2B4FF704 /* Pods-ReactNativeTypescriptExamples-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +180,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				CB4BAABA257206C70099C029 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* ReactNativeTypescriptExamples */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ReactNativeTypescriptExamplesTests */,
@@ -196,6 +202,17 @@
 				2D02E4901E0B4A5D006451C7 /* ReactNativeTypescriptExamples-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CB4BAABA257206C70099C029 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CB4BAAC0257206C70099C029 /* FontAwesome5_Brands.ttf */,
+				CB4BAAC1257206C70099C029 /* FontAwesome5_Regular.ttf */,
+				CB4BAAC2257206C70099C029 /* FontAwesome5_Solid.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,7 +357,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB4BAAD0257206C70099C029 /* FontAwesome5_Brands.ttf in Resources */,
+				CB4BAAD2257206C70099C029 /* FontAwesome5_Solid.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				CB4BAAD1257206C70099C029 /* FontAwesome5_Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,10 +484,18 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeTypescriptExamples-ReactNativeTypescriptExamplesTests/Pods-ReactNativeTypescriptExamples-ReactNativeTypescriptExamplesTests-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,10 +532,18 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeTypescriptExamples/Pods-ReactNativeTypescriptExamples-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
