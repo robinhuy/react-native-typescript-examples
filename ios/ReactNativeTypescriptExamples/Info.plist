@@ -59,5 +59,9 @@
 		<string>FontAwesome5_Regular.ttf</string>
 		<string>FontAwesome5_Solid.ttf</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>Get your location to booking car</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Get your location to booking car</string>
 </dict>
 </plist>

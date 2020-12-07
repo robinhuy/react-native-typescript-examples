@@ -1,10 +1,16 @@
+import React, {useEffect, useState} from 'react';
+import {Keyboard, StyleSheet, View} from 'react-native';
 import {Container, Icon} from 'native-base';
-import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import MapView, {PROVIDER_GOOGLE, Marker, Circle} from 'react-native-maps';
-// import Geocoder from 'react-native-geocoder';
+import MapView, {
+  PROVIDER_GOOGLE,
+  Marker,
+  Circle,
+  Region,
+} from 'react-native-maps';
+import Geocoder from 'react-native-geocoder';
 
 import ChooseLocation from './ChooseLocation';
+import {GeoCodingResult} from './model';
 
 const App: React.FunctionComponent = () => {
   const initialCoordinate = {
@@ -19,22 +25,57 @@ const App: React.FunctionComponent = () => {
   };
   // const [pinCoordinate, setPinCoordinate] = useState(initialCoordinate);
   const [startLocation, setStartLocation] = useState('');
+  const [isKeyboardDidShow, setKeyboardDidShow] = useState(false);
 
-  function getCurrentLocation(currentLocation) {
-    // const position = {
-    //   lat: currentLocation.latitude,
-    //   lng: currentLocation.longitude,
-    // };
-    // Geocoder.geocodePosition(position)
-    //   .then((result) => {
-    //     const streetNumber = result[0].streetNumber || '';
-    //     const streetName = result[0].streetName || '';
-    //     let location = `${streetNumber} ${streetName}`;
-    //     if (location.trim() === '') location = result[0].formattedAddress;
-    //     setStartLocation(location);
-    //   })
-    //   .catch((err) => console.log(err));
+  async function getCurrentLocation(currentLocation: Region) {
+    const position = {
+      lat: currentLocation.latitude,
+      lng: currentLocation.longitude,
+    };
+
+    Geocoder.geocodePosition(position)
+      .then((results: GeoCodingResult[]) => {
+        const result = results[0];
+        const streetNumber = result.streetNumber || '';
+        const streetName = result.streetName || '';
+        let location = `${streetNumber} ${streetName}`;
+        if (location.trim() === '') {
+          location = result.formattedAddress;
+        }
+
+        setStartLocation(location);
+      })
+      .catch((err: Error) => console.log(err));
   }
+
+  function keyboardWillShow() {
+    setKeyboardDidShow(true);
+  }
+
+  function keyboardDidShow() {
+    console.log('did');
+    // setKeyboardDidShow(true);
+  }
+
+  function keyboardDidHide() {
+    setKeyboardDidShow(false);
+  }
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      keyboardDidShow,
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      keyboardDidHide,
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   return (
     <Container>
@@ -42,9 +83,9 @@ const App: React.FunctionComponent = () => {
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         initialRegion={initialRegion}
-        onRegionChangeComplete={(currentRegion) =>
-          getCurrentLocation(currentRegion)
-        }>
+        showsUserLocation={true}
+        loadingEnabled={true}
+        onRegionChangeComplete={getCurrentLocation}>
         <Circle
           center={initialCoordinate}
           radius={300}
@@ -55,7 +96,8 @@ const App: React.FunctionComponent = () => {
         <Marker coordinate={initialCoordinate} anchor={{x: 0.5, y: 0.5}}>
           <Icon
             type="FontAwesome5"
-            name="circle"
+            name="dot-circle"
+            solid={true}
             style={styles.currentLocationMarker}
           />
         </Marker>
@@ -88,12 +130,12 @@ const styles = StyleSheet.create({
     color: '#44b9e9',
   },
   currentLocationMarker: {
-    color: '#215dd5',
+    color: '#4682fe',
     fontSize: 16,
   },
   chooseLocation: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 35,
     left: 15,
     right: 15,
   },
