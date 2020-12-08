@@ -1,12 +1,24 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import {StyleSheet, Alert} from 'react-native';
-import {Card, CardItem, Col, Grid, Icon, Input, Item} from 'native-base';
+import {StyleSheet} from 'react-native';
+import {
+  Button,
+  Card,
+  CardItem,
+  Col,
+  Grid,
+  Icon,
+  Input,
+  Item,
+  Text,
+  View,
+} from 'native-base';
 
 interface ChooseLocationProps {
   startLocation: string;
   endLocation: string;
   setStartLocation: Dispatch<SetStateAction<string>>;
   setEndLocation: Dispatch<SetStateAction<string>>;
+  confirmBooking: () => void;
 }
 
 const ChooseLocation: React.FunctionComponent<ChooseLocationProps> = ({
@@ -14,11 +26,8 @@ const ChooseLocation: React.FunctionComponent<ChooseLocationProps> = ({
   endLocation,
   setStartLocation,
   setEndLocation,
+  confirmBooking,
 }) => {
-  function check() {
-    
-  }
-
   return (
     <Card>
       <CardItem>
@@ -39,15 +48,15 @@ const ChooseLocation: React.FunctionComponent<ChooseLocationProps> = ({
               type="FontAwesome5"
               style={styles.goToLocationIcon}
             />
+            <View style={styles.tempView} />
           </Col>
 
-          <Col style={styles.colRight}>
+          <Col>
             <Input
               placeholder="Enter your location"
               style={styles.input}
               value={startLocation}
               onChangeText={setStartLocation}
-              onBlur={check}
             />
             <Item />
             <Input
@@ -55,8 +64,14 @@ const ChooseLocation: React.FunctionComponent<ChooseLocationProps> = ({
               style={styles.input}
               value={endLocation}
               onChangeText={setEndLocation}
-              onBlur={check}
             />
+            <Button
+              block
+              style={styles.bookingButton}
+              onPress={confirmBooking}
+              disabled={startLocation === '' || endLocation === ''}>
+              <Text>Confirm</Text>
+            </Button>
           </Col>
         </Grid>
       </CardItem>
@@ -66,7 +81,7 @@ const ChooseLocation: React.FunctionComponent<ChooseLocationProps> = ({
 
 const styles = StyleSheet.create({
   colLeft: {
-    width: 40,
+    width: 36,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -85,10 +100,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#e74c3c',
   },
-  colRight: {},
+  tempView: {
+    height: 53,
+  },
   input: {
     fontSize: 14,
     borderBottomWidth: 0,
+  },
+  bookingButton: {
+    marginTop: 10,
   },
 });
 

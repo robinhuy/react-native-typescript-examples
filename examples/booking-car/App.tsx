@@ -12,35 +12,50 @@ import MapView, {
   Marker,
   Circle,
   Region,
+  LatLng,
 } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 import Geocoder from 'react-native-geocoder';
 
 import ChooseLocation from './ChooseLocation';
 import {GeoCodingResult} from './model';
-
-const initialCoordinate = {
-  latitude: 20.9981259,
-  longitude: 105.7921106,
-};
-const initialRegion = {
-  latitude: 20.9981259,
-  longitude: 105.7921106,
-  latitudeDelta: 0.01,
-  longitudeDelta: 0.01,
-};
+import {
+  GOOGLE_MAPS_APIKEY,
+  initialCoordinate,
+  initialRegion,
+  initialLocation,
+} from './const';
 
 const App: React.FunctionComponent = () => {
-  const [startLocation, setStartLocation] = useState(
-    '48 Tố Hữu, Trung Văn, Từ Liêm, Hà Nội',
+  const [startLocation, setStartLocation] = useState<string>(initialLocation);
+  const [endLocation, setEndLocation] = useState<string>('');
+  const [startCoordinate, setStartCoordinate] = useState<LatLng | ''>(
+    initialCoordinate,
   );
-  const [endLocation, setEndLocation] = useState('');
+  const [endCoordinate, setEndCoordinate] = useState<LatLng | ''>('');
+  const [endDestination, setEndDestination] = useState<LatLng | ''>('');
+  const [isBooked, setBooked] = useState<boolean>(false);
   const slideAnimation = useRef(new Animated.Value(0)).current;
 
   async function getCurrentLocation(currentLocation: Region) {
+    const {latitude, longitude} = currentLocation;
+
+    if (
+      Math.round(latitude * 100) ===
+        Math.round(initialCoordinate.latitude * 100) &&
+      Math.round(longitude * 100) ===
+        Math.round(initialCoordinate.longitude * 100)
+    ) {
+      return;
+    }
+
     const position = {
-      lat: currentLocation.latitude,
-      lng: currentLocation.longitude,
+      lat: latitude,
+      lng: longitude,
     };
+    const coordinate = {latitude, longitude};
+
+    setEndCoordinate(coordinate);
 
     Geocoder.geocodePosition(position)
       .then((results: GeoCodingResult[]) => {
@@ -55,6 +70,11 @@ const App: React.FunctionComponent = () => {
         setEndLocation(location);
       })
       .catch((err: Error) => console.log(err));
+  }
+
+  function confirmBooking() {
+    setBooked(true);
+    setEndDestination(endCoordinate);
   }
 
   function keyboardWillShow(event: KeyboardEvent) {
@@ -95,7 +115,7 @@ const App: React.FunctionComponent = () => {
         onRegionChangeComplete={getCurrentLocation}>
         <Circle
           center={initialCoordinate}
-          radius={300}
+          radius={100}
           strokeColor="rgba(190, 210, 240, 0.8)"
           fillColor="rgba(190, 210, 240, 0.4)"
         />
@@ -108,6 +128,27 @@ const App: React.FunctionComponent = () => {
             style={styles.currentLocationMarker}
           />
         </Marker>
+
+        {isBooked && (
+          <>
+            <MapViewDirections
+              origin={startCoordinate}
+              destination={endDestination}
+              apikey={GOOGLE_MAPS_APIKEY}
+              strokeWidth={5}
+              strokeColor="#4595ff"
+            />
+
+            <Marker coordinate={endDestination} anchor={{x: 0.5, y: 0.5}}>
+              <Icon
+                type="FontAwesome5"
+                name="map-marker-alt"
+                solid={true}
+                style={styles.destinationLocationMarker}
+              />
+            </Marker>
+          </>
+        )}
       </MapView>
 
       <View style={styles.mapPinWrapper} pointerEvents="box-none">
@@ -124,6 +165,7 @@ const App: React.FunctionComponent = () => {
           endLocation={endLocation}
           setStartLocation={setStartLocation}
           setEndLocation={setEndLocation}
+          confirmBooking={confirmBooking}
         />
       </Animated.View>
     </Container>
@@ -153,6 +195,10 @@ const styles = StyleSheet.create({
   currentLocationMarker: {
     color: '#4682fe',
     fontSize: 16,
+  },
+  destinationLocationMarker: {
+    color: '#e74c3c',
+    fontSize: 26,
   },
   chooseLocation: {
     position: 'absolute',
