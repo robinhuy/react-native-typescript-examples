@@ -1,5 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {Keyboard, StyleSheet, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  StyleSheet,
+  View,
+  Keyboard,
+  KeyboardEvent,
+  Animated,
+} from 'react-native';
 import {Container, Icon} from 'native-base';
 import MapView, {
   PROVIDER_GOOGLE,
@@ -12,20 +18,23 @@ import Geocoder from 'react-native-geocoder';
 import ChooseLocation from './ChooseLocation';
 import {GeoCodingResult} from './model';
 
+const initialCoordinate = {
+  latitude: 20.9981259,
+  longitude: 105.7921106,
+};
+const initialRegion = {
+  latitude: 20.9981259,
+  longitude: 105.7921106,
+  latitudeDelta: 0.01,
+  longitudeDelta: 0.01,
+};
+
 const App: React.FunctionComponent = () => {
-  const initialCoordinate = {
-    latitude: 20.99848524,
-    longitude: 105.79469706,
-  };
-  const initialRegion = {
-    latitude: 20.99848524,
-    longitude: 105.79469706,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01,
-  };
-  // const [pinCoordinate, setPinCoordinate] = useState(initialCoordinate);
-  const [startLocation, setStartLocation] = useState('');
-  const [isKeyboardDidShow, setKeyboardDidShow] = useState(false);
+  const [startLocation, setStartLocation] = useState(
+    '48 Tố Hữu, Trung Văn, Từ Liêm, Hà Nội',
+  );
+  const [endLocation, setEndLocation] = useState('');
+  const slideAnimation = useRef(new Animated.Value(0)).current;
 
   async function getCurrentLocation(currentLocation: Region) {
     const position = {
@@ -43,38 +52,36 @@ const App: React.FunctionComponent = () => {
           location = result.formattedAddress;
         }
 
-        setStartLocation(location);
+        setEndLocation(location);
       })
       .catch((err: Error) => console.log(err));
   }
 
-  function keyboardWillShow() {
-    setKeyboardDidShow(true);
+  function keyboardWillShow(event: KeyboardEvent) {
+    Animated.timing(slideAnimation, {
+      useNativeDriver: true,
+      toValue: -event.endCoordinates.height,
+      duration: 100,
+    }).start();
   }
 
-  function keyboardDidShow() {
-    console.log('did');
-    // setKeyboardDidShow(true);
-  }
-
-  function keyboardDidHide() {
-    setKeyboardDidShow(false);
+  function keyboardWillHide() {
+    Animated.timing(slideAnimation, {
+      useNativeDriver: true,
+      toValue: 0,
+      duration: 100,
+    }).start();
   }
 
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      keyboardDidShow,
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      keyboardDidHide,
-    );
+    Keyboard.addListener('keyboardWillShow', keyboardWillShow);
+    Keyboard.addListener('keyboardWillHide', keyboardWillHide);
 
     return () => {
-      keyboardDidHideListener.remove();
-      keyboardDidHideListener.remove();
+      Keyboard.removeListener('keyboardWillShow', keyboardWillShow);
+      Keyboard.removeListener('keyboardWillHide', keyboardWillHide);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -107,12 +114,18 @@ const App: React.FunctionComponent = () => {
         <Icon type="FontAwesome5" name="map-pin" style={styles.mapPin} />
       </View>
 
-      <View style={styles.chooseLocation}>
+      <Animated.View
+        style={[
+          styles.chooseLocation,
+          {transform: [{translateY: slideAnimation}]},
+        ]}>
         <ChooseLocation
           startLocation={startLocation}
+          endLocation={endLocation}
           setStartLocation={setStartLocation}
+          setEndLocation={setEndLocation}
         />
-      </View>
+      </Animated.View>
     </Container>
   );
 };
@@ -128,6 +141,14 @@ const styles = StyleSheet.create({
   },
   mapPin: {
     color: '#44b9e9',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+    elevation: 16,
   },
   currentLocationMarker: {
     color: '#4682fe',
@@ -135,9 +156,9 @@ const styles = StyleSheet.create({
   },
   chooseLocation: {
     position: 'absolute',
-    bottom: 35,
     left: 15,
     right: 15,
+    bottom: 30,
   },
 });
 

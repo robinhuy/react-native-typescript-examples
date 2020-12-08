@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import {StyleSheet, Alert} from 'react-native';
 import {Card, CardItem, Col, Grid, Icon, Input, Item} from 'native-base';
 
 interface ChooseLocationProps {
-  startLocation: any;
-  setStartLocation: any;
+  startLocation: string;
+  endLocation: string;
+  setStartLocation: Dispatch<SetStateAction<string>>;
+  setEndLocation: Dispatch<SetStateAction<string>>;
 }
 
 const ChooseLocation: React.FunctionComponent<ChooseLocationProps> = ({
   startLocation,
+  endLocation,
   setStartLocation,
+  setEndLocation,
 }) => {
-  const [endLocation, setEndLocation] = useState('');
-
   function check() {
-    if (endLocation) {
-      Alert.alert('ok');
-    }
+    
   }
 
   return (
@@ -46,15 +46,16 @@ const ChooseLocation: React.FunctionComponent<ChooseLocationProps> = ({
               placeholder="Enter your location"
               style={styles.input}
               value={startLocation}
-              onChangeText={(value) => setStartLocation(value)}
-              onBlur={() => check()}
+              onChangeText={setStartLocation}
+              onBlur={check}
             />
             <Item />
             <Input
               placeholder="I want to go to ..."
               style={styles.input}
-              onChangeText={(value) => setEndLocation(value)}
-              onBlur={() => check()}
+              value={endLocation}
+              onChangeText={setEndLocation}
+              onBlur={check}
             />
           </Col>
         </Grid>
