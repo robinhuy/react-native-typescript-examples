@@ -1,10 +1,10 @@
 import React from 'react';
-import Quiz from './examples/quiz/App';
-import BookingCar from './examples/booking-car/App';
+import Quiz from './examples/1-quiz-game/App';
+import BookingCar from './examples/2-booking-car/App';
 
 const App: React.FunctionComponent = () => {
+  // return <Quiz />;
   return <BookingCar />;
-  return <Quiz />;
 };
 
 export default App;
