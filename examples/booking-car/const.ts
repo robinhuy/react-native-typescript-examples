@@ -1,6 +1,7 @@
 import {LatLng, Region} from 'react-native-maps';
 
-export const GOOGLE_MAPS_APIKEY = 'XXX';
+// https://developers.google.com/maps/documentation/geocoding/get-api-key
+export const GOOGLE_MAPS_APIKEY = 'AIzaSyCTpJwHhRiSNGhobAggwnqI8Laa6M8SjN0';
 
 export const initialCoordinate: LatLng = {
   latitude: 20.9980766,

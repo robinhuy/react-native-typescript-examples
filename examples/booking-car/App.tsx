@@ -15,66 +15,50 @@ import MapView, {
   LatLng,
 } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import Geocoder from 'react-native-geocoder';
-
 import ChooseLocation from './ChooseLocation';
-import {GeoCodingResult} from './model';
 import {
   GOOGLE_MAPS_APIKEY,
   initialCoordinate,
   initialRegion,
   initialLocation,
 } from './const';
+import {reverseGeoCoding} from './googleAPI';
 
 const App: React.FunctionComponent = () => {
   const [startLocation, setStartLocation] = useState<string>(initialLocation);
   const [endLocation, setEndLocation] = useState<string>('');
-  const [startCoordinate, setStartCoordinate] = useState<LatLng | ''>(
+  const [startCoordinate, setStartCoordinate] = useState<LatLng>(
     initialCoordinate,
   );
-  const [endCoordinate, setEndCoordinate] = useState<LatLng | ''>('');
-  const [endDestination, setEndDestination] = useState<LatLng | ''>('');
+  const [endCoordinate, setEndCoordinate] = useState<LatLng>(initialCoordinate);
+  const [destination, setDestination] = useState<LatLng>(initialCoordinate);
   const [isBooked, setBooked] = useState<boolean>(false);
   const slideAnimation = useRef(new Animated.Value(0)).current;
+  const mapViewRef = useRef(null);
 
-  async function getCurrentLocation(currentLocation: Region) {
+  async function chooseDestination(currentLocation: Region) {
     const {latitude, longitude} = currentLocation;
 
     if (
       Math.round(latitude * 100) ===
-        Math.round(initialCoordinate.latitude * 100) &&
+        Math.round(startCoordinate.latitude * 100) &&
       Math.round(longitude * 100) ===
-        Math.round(initialCoordinate.longitude * 100)
+        Math.round(startCoordinate.longitude * 100)
     ) {
       return;
     }
 
-    const position = {
-      lat: latitude,
-      lng: longitude,
-    };
     const coordinate = {latitude, longitude};
-
     setEndCoordinate(coordinate);
 
-    Geocoder.geocodePosition(position)
-      .then((results: GeoCodingResult[]) => {
-        const result = results[0];
-        const streetNumber = result.streetNumber || '';
-        const streetName = result.streetName || '';
-        let location = `${streetNumber} ${streetName}`;
-        if (location.trim() === '') {
-          location = result.formattedAddress;
-        }
-
-        setEndLocation(location);
-      })
-      .catch((err: Error) => console.log(err));
+    const location = await reverseGeoCoding(latitude, longitude);
+    setEndLocation(location.results[0].formatted_address);
   }
 
   function confirmBooking() {
     setBooked(true);
-    setEndDestination(endCoordinate);
+    setDestination(endCoordinate);
+    Keyboard.dismiss();
   }
 
   function keyboardWillShow(event: KeyboardEvent) {
@@ -107,20 +91,20 @@ const App: React.FunctionComponent = () => {
   return (
     <Container>
       <MapView
+        ref={mapViewRef}
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         initialRegion={initialRegion}
         showsUserLocation={true}
         loadingEnabled={true}
-        onRegionChangeComplete={getCurrentLocation}>
+        onRegionChangeComplete={chooseDestination}>
         <Circle
-          center={initialCoordinate}
+          center={startCoordinate}
           radius={100}
           strokeColor="rgba(190, 210, 240, 0.8)"
           fillColor="rgba(190, 210, 240, 0.4)"
         />
-
-        <Marker coordinate={initialCoordinate} anchor={{x: 0.5, y: 0.5}}>
+        <Marker coordinate={startCoordinate} anchor={{x: 0.5, y: 0.5}}>
           <Icon
             type="FontAwesome5"
             name="dot-circle"
@@ -133,13 +117,13 @@ const App: React.FunctionComponent = () => {
           <>
             <MapViewDirections
               origin={startCoordinate}
-              destination={endDestination}
+              destination={destination}
               apikey={GOOGLE_MAPS_APIKEY}
               strokeWidth={5}
               strokeColor="#4595ff"
             />
 
-            <Marker coordinate={endDestination} anchor={{x: 0.5, y: 0.5}}>
+            <Marker coordinate={destination} anchor={{x: 0.5, y: 0.5}}>
               <Icon
                 type="FontAwesome5"
                 name="map-marker-alt"
@@ -165,7 +149,10 @@ const App: React.FunctionComponent = () => {
           endLocation={endLocation}
           setStartLocation={setStartLocation}
           setEndLocation={setEndLocation}
+          setStartCoordinate={setStartCoordinate}
+          setEndCoordinate={setEndCoordinate}
           confirmBooking={confirmBooking}
+          mapView={mapViewRef.current}
         />
       </Animated.View>
     </Container>
