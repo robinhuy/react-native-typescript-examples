@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -24,7 +24,7 @@ import {
 } from './const';
 import {reverseGeoCoding} from './googleAPI';
 
-const App: React.FunctionComponent = () => {
+const App: FunctionComponent = () => {
   const [startLocation, setStartLocation] = useState<string>(initialLocation);
   const [endLocation, setEndLocation] = useState<string>('');
   const [startCoordinate, setStartCoordinate] = useState<LatLng>(

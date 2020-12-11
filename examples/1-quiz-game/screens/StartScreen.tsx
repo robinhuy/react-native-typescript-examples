@@ -1,13 +1,11 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native';
 
 interface StartScreenProps {
   startGame: () => void;
 }
 
-const StartScreen: React.FunctionComponent<StartScreenProps> = ({
-  startGame,
-}) => {
+const StartScreen: FunctionComponent<StartScreenProps> = ({startGame}) => {
   return (
     <View style={styles.body}>
       <View style={styles.heading}>

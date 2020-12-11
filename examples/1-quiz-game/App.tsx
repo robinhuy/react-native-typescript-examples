@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 
 import StartScreen from './screens/StartScreen';
 import GameScreen from './screens/GameScreen';
 
-const App = () => {
+const App: FunctionComponent = () => {
   const [isPlaying, setPlaying] = useState(false);
 
   function startGame() {

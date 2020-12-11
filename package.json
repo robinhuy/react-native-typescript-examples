@@ -10,16 +10,29 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/drawer": "^5.11.4",
+    "@react-navigation/native": "^5.8.10",
+    "@react-navigation/stack": "^5.12.8",
     "lodash": "^4.17.20",
-    "native-base": "^2.13.14",
+    "mobx": "^6.0.4",
+    "mobx-react": "^7.0.5",
+    "native-base": "^2.13.15",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-gesture-handler": "1.8.0",
     "react-native-maps": "0.27.1",
     "react-native-maps-directions": "^1.8.0",
-    "react-native-vector-icons": "^7.1.0"
+    "react-native-reanimated": "^1.13.2",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-screens": "^2.16.1",
+    "react-native-swipe-list-view": "^3.2.5",
+    "react-native-vector-icons": "^7.1.0",
+    "react-native-webview": "9.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
+    "@babel/core": "^7.12.10",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/jest": "^25.2.3",

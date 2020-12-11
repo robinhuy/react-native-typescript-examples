@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 import {StyleSheet, View, Text, TouchableHighlight} from 'react-native';
 
 const BUTTON_BG_COLOR = ['#2c70ad', '#3d9ea6', '#eea928', '#d4546c'];
@@ -13,7 +13,7 @@ interface AnswerBoxProps {
   checkAnswer: (userAnswer: string) => void;
 }
 
-const AnswerBox: React.FunctionComponent<AnswerBoxProps> = ({
+const AnswerBox: FunctionComponent<AnswerBoxProps> = ({
   answers,
   checkAnswer,
 }) => {

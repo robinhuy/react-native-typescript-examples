@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 interface ProgressBarProps {
   progress: number;
 }
 
-const ProgressBar: React.FunctionComponent<ProgressBarProps> = ({progress}) => {
+const ProgressBar: FunctionComponent<ProgressBarProps> = ({progress}) => {
   return (
     <View style={styles.progressBarWrapper}>
       <View style={[styles.progressBar, {width: progress + '%'}]} />

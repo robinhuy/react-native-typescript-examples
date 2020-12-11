@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 import ProgressBar from './ProgressBar';
@@ -9,7 +9,7 @@ interface HeaderProps {
   progress: number;
 }
 
-const Header: React.FunctionComponent<HeaderProps> = ({
+const Header: FunctionComponent<HeaderProps> = ({
   currentQuestion,
   totalQuestions,
   progress,

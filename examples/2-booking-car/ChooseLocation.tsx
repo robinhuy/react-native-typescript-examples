@@ -1,4 +1,9 @@
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {
+  Dispatch,
+  FunctionComponent,
+  SetStateAction,
+  useState,
+} from 'react';
 import {Keyboard, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   Button,
@@ -26,7 +31,7 @@ interface ChooseLocationProps {
   confirmBooking: () => void;
 }
 
-const ChooseLocation: React.FunctionComponent<ChooseLocationProps> = ({
+const ChooseLocation: FunctionComponent<ChooseLocationProps> = ({
   startLocation,
   endLocation,
   mapView,
