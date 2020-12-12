@@ -1,64 +1,66 @@
-import {observable, action} from 'mobx';
+import {makeAutoObservable} from 'mobx';
+import {createContext} from 'react';
+import {create} from 'apisauce';
 import AsyncStorage from '@react-native-community/async-storage';
+import {Email, User} from './models';
 
-const DOMAIN = 'http://192.168.1.105:3000';
+const DOMAIN = 'http://192.168.1.194:3000';
 const LOGIN_KEY = 'loginToken';
 const AVATAR_KEY = 'avatar';
+const DEFAULT_AVATAR =
+  'https://globalplatform.org/wp-content/uploads/2018/03/default-avatar.png';
+
+const api = create({
+  baseURL: 'http://192.168.1.194:3000',
+  headers: {'Content-Type': 'application/json'},
+});
 
 class Store {
-  isLoginSuccess = null;
-  token = '';
-  avatar =
-    'https://globalplatform.org/wp-content/uploads/2018/03/default-avatar.png';
-  emails = [];
-  checkedEmails = [];
-  isShowToolbar = false;
-  emailContent = '';
+  isLoginSuccess: boolean | null = null;
+  token: string = '';
+  avatar: string = DEFAULT_AVATAR;
+  emails: Email[] = [];
+  checkedEmails: Email[] = [];
+  isShowToolbar: boolean = false;
+  emailContent: string = '';
 
   constructor() {
-    checkLogin = async () => {
+    makeAutoObservable(this);
+
+    (async () => {
       try {
         const loginToken = await AsyncStorage.getItem(LOGIN_KEY);
         const avatar = await AsyncStorage.getItem(AVATAR_KEY);
 
         if (loginToken !== '') {
           this.isLoginSuccess = true;
-          this.avatar = avatar;
-          this.token = loginToken;
+          this.setAvatar(avatar || '');
+          this.token = loginToken || '';
         }
       } catch (e) {
         console.log(e);
       }
-    };
-
-    checkLogin();
+    })();
   }
 
-  setLoginSuccess = (result) => {
+  setLoginSuccess = (result: boolean | null) => {
     this.isLoginSuccess = result;
   };
 
-  setAvatar = (avatar) => {
-    this.avatar = avatar;
+  setAvatar = (avatar: string) => {
+    this.avatar = avatar || DEFAULT_AVATAR;
   };
 
-  login = async (email, password) => {
-    const res = await fetch(`${DOMAIN}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({email, password}),
-    });
+  login = async (email: string, password: string) => {
+    const res = await api.post<User>('/login', {email, password});
 
-    if (res.status === 200) {
-      const user = await res.json();
-
+    if (res.ok) {
+      const user = res.data;
       this.setLoginSuccess(true);
-      this.setAvatar(user.avatar);
-      this.token = user.token;
-      AsyncStorage.setItem(LOGIN_KEY, user.token);
-      AsyncStorage.setItem(AVATAR_KEY, user.avatar);
+      this.setAvatar(user?.avatar || '');
+      this.token = user?.token || '';
+      AsyncStorage.setItem(LOGIN_KEY, user?.token || '');
+      AsyncStorage.setItem(AVATAR_KEY, user?.avatar || '');
     } else {
       this.setLoginSuccess(false);
     }
@@ -66,27 +68,22 @@ class Store {
 
   logout = () => {
     this.setLoginSuccess(null);
-    this.setAvatar(
-      'https://globalplatform.org/wp-content/uploads/2018/03/default-avatar.png',
-    );
+    this.setAvatar('');
     AsyncStorage.setItem(LOGIN_KEY, '');
-    AsyncStorage.setItem(
-      AVATAR_KEY,
-      'https://globalplatform.org/wp-content/uploads/2018/03/default-avatar.png',
-    );
+    AsyncStorage.setItem(AVATAR_KEY, '');
   };
 
-  setEmails = (emails) => {
+  setEmails = (emails: Email[]) => {
     this.emails = emails;
   };
 
-  getEmails = async (category) => {
+  getEmails = async (category: string) => {
     const result = await fetch(`${DOMAIN}/${category}`);
     const emails = await result.json();
     this.emails = emails;
   };
 
-  updateEmail = async (category, email) => {
+  updateEmail = async (category: string, email: string) => {
     const result = await fetch(`${DOMAIN}/${category}/${email.id}`, {
       method: 'PUT',
       headers: {
@@ -103,7 +100,11 @@ class Store {
     return result;
   };
 
-  moveEmails = async (fromCategory, toCategory, emails) => {
+  moveEmails = async (
+    fromCategory: string,
+    toCategory: string,
+    emails: Email[],
+  ) => {
     const result = await Promise.all(
       emails.map((email) =>
         fetch(`${DOMAIN}/${toCategory}`, {
@@ -122,7 +123,7 @@ class Store {
     return result;
   };
 
-  moveSelectedEmails = async (fromCategory, toCategory) => {
+  moveSelectedEmails = async (fromCategory: string, toCategory: string) => {
     let selectedEmails = [];
     let unselectedEmails = [];
     for (let item of this.emails) {
@@ -140,7 +141,7 @@ class Store {
     this.setShowToolbar(false);
   };
 
-  toggleStar = async (category, emailId) => {
+  toggleStar = async (category: string, emailId: string) => {
     this.emails = this.emails.map((email) => {
       if (email.id === emailId) {
         email.isStarred = !email.isStarred;
@@ -151,15 +152,15 @@ class Store {
     });
   };
 
-  setCheckedEmails = (emails) => {
+  setCheckedEmails = (emails: Email[]) => {
     this.checkedEmails = emails;
   };
 
-  setShowToolbar = (data) => {
+  setShowToolbar = (data: boolean) => {
     this.isShowToolbar = data;
   };
 
-  checkEmail = (emailId) => {
+  checkEmail = (emailId: string) => {
     const indexOfCheckedEmail = this.checkedEmails.indexOf(emailId);
 
     if (indexOfCheckedEmail !== -1) {
@@ -175,31 +176,11 @@ class Store {
     }
   };
 
-  setEmailContent = (data) => {
+  setEmailContent = (data: string) => {
     this.emailContent = data;
   };
 }
 
-// decorate(Store, {
-//   isLoginSuccess: observable,
-//   emails: observable,
-//   checkedEmails: observable,
-//   isShowToolbar: observable,
-//   emailContent: observable,
-//   setLoginSuccess: action,
-//   avatar: observable,
-//   setAvatar: action,
-//   login: action,
-//   logout: action,
-//   setEmails: action,
-//   getEmails: action,
-//   updateEmail: action,
-//   checkEmail: action,
-//   setShowToolbar: action,
-//   toggleStar: action,
-//   moveEmails: action,
-//   moveSelectedEmails: action,
-//   setEmailContent: action,
-// });
+export const StoreContext = createContext<Store>(new Store());
 
-export default new Store();
+export default Store;

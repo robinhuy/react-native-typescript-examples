@@ -1,11 +1,22 @@
-import React, {FunctionComponent} from 'react';
-import {inject, observer} from 'mobx-react';
+import React, {FunctionComponent, useContext} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {ListItem, Left, Body, Right, CheckBox, Text, Icon} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
+import {observer} from 'mobx-react-lite';
+import {StoreContext} from '../models/Store';
+import {Email} from '../models/models';
 
-const EmailListItem: FunctionComponent = ({store, item, category}) => {
+interface EmailListItemProps {
+  item: Email;
+  category: string;
+}
+
+const EmailListItem: FunctionComponent<EmailListItemProps> = ({
+  item,
+  category,
+}) => {
   const navigation = useNavigation();
+  const store = useContext(StoreContext);
   const {checkedEmails, checkEmail, toggleStar, setEmailContent} = store;
 
   function goToDetailScreen() {
@@ -59,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('store')(observer(EmailListItem));
+export default observer(EmailListItem);

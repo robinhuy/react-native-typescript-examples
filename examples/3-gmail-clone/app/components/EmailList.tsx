@@ -1,16 +1,23 @@
-import React, {FunctionComponent, useEffect} from 'react';
-import {inject, observer} from 'mobx-react';
+import React, {FunctionComponent, useContext, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Icon} from 'native-base';
 import {SwipeListView} from 'react-native-swipe-list-view';
-
+import {observer} from 'mobx-react-lite';
+import {StoreContext} from '../models/Store';
+import {Email} from '../models/models';
 import EmailListItem from './EmailListItem';
 
-const EmailList: FunctionComponent = ({store, category}) => {
+interface EmailListProps {
+  category: string;
+}
+
+const EmailList: FunctionComponent<EmailListProps> = ({category}) => {
+  const store = useContext(StoreContext);
   const {emails, getEmails} = store;
 
   useEffect(() => {
     getEmails(category);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -19,7 +26,7 @@ const EmailList: FunctionComponent = ({store, category}) => {
       renderItem={(data) => (
         <EmailListItem item={data.item} category={category} />
       )}
-      renderHiddenItem={(data) => (
+      renderHiddenItem={() => (
         <View style={styles.swipeListHiddenItem}>
           <View style={styles.swipeListHiddenIconWrapper}>
             <Icon name="archive" style={styles.swipeListHiddenIcon} />
@@ -29,7 +36,7 @@ const EmailList: FunctionComponent = ({store, category}) => {
           </View>
         </View>
       )}
-      keyExtractor={(item) => item.id?.toString()}
+      keyExtractor={(item: Email) => item.id?.toString()}
       leftOpenValue={75}
       rightOpenValue={-75}
     />
@@ -54,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('store')(observer(EmailList));
+export default observer(EmailList);

@@ -5,13 +5,12 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {Provider} from 'mobx-react';
-import Store from './Store';
+import Store, {StoreContext} from './models/Store';
 
 import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailScreen';
 import TrashScreen from './screens/TrashScreen';
-import LoginScreen from './screens/LoginScreen';
+import LoginScreen from './screens/login/LoginScreen';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -71,7 +70,7 @@ const MainStack = createStackNavigator();
 
 const App: FunctionComponent = () => {
   return (
-    <Provider store={Store}>
+    <StoreContext.Provider value={new Store()}>
       <NavigationContainer theme={MyTheme}>
         <MainStack.Navigator>
           <MainStack.Screen
@@ -86,7 +85,7 @@ const App: FunctionComponent = () => {
           />
         </MainStack.Navigator>
       </NavigationContainer>
-    </Provider>
+    </StoreContext.Provider>
   );
 };
 

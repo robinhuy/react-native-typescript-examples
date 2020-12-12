@@ -1,19 +1,20 @@
-import React, {FunctionComponent, useCallback} from 'react';
-import {inject, observer} from 'mobx-react';
-import {useFocusEffect} from '@react-navigation/native';
-import {StyleSheet} from 'react-native';
+import React, {FunctionComponent, useCallback, useContext} from 'react';
 import {Container} from 'native-base';
-
-import HeaderComponent from '../components/HeaderComponent';
+import {observer} from 'mobx-react-lite';
+import {StoreContext} from '../models/Store';
+import {useFocusEffect} from '@react-navigation/native';
+import HeaderComponent from '../components/ScreenHeader';
 import Toolbar from '../components/Toolbar';
 import EmailList from '../components/EmailList';
 
-const TrashScreen: FunctionComponent = ({store}) => {
+const TrashScreen: FunctionComponent = () => {
+  const store = useContext(StoreContext);
   const {isShowToolbar, getEmails} = store;
 
   useFocusEffect(
     useCallback(() => {
       getEmails('trashEmails');
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
   );
 
@@ -30,6 +31,4 @@ const TrashScreen: FunctionComponent = ({store}) => {
   );
 };
 
-const styles = StyleSheet.create({});
-
-export default inject('store')(observer(TrashScreen));
+export default observer(TrashScreen);

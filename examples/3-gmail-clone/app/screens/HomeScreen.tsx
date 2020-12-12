@@ -1,19 +1,20 @@
-import React, {FunctionComponent, useCallback} from 'react';
-import {inject, observer} from 'mobx-react';
+import React, {FunctionComponent, useCallback, useContext} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
-import {StyleSheet} from 'react-native';
 import {Container} from 'native-base';
-
-import HeaderComponent from '../components/HeaderComponent';
+import {observer} from 'mobx-react-lite';
+import {StoreContext} from '../models/Store';
+import ScreenHeader from '../components/ScreenHeader';
 import Toolbar from '../components/Toolbar';
 import EmailList from '../components/EmailList';
 
-const HomeScreen: FunctionComponent = ({store}) => {
+const HomeScreen: FunctionComponent = () => {
+  const store = useContext(StoreContext);
   const {isShowToolbar, getEmails} = store;
 
   useFocusEffect(
     useCallback(() => {
       getEmails('emails');
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
   );
 
@@ -22,7 +23,7 @@ const HomeScreen: FunctionComponent = ({store}) => {
       {isShowToolbar ? (
         <Toolbar category="emails" />
       ) : (
-        <HeaderComponent hasMenuButton title="Inbox" />
+        <ScreenHeader hasMenuButton title="Inbox" />
       )}
 
       <EmailList category="emails" />
@@ -30,6 +31,4 @@ const HomeScreen: FunctionComponent = ({store}) => {
   );
 };
 
-const styles = StyleSheet.create({});
-
-export default inject('store')(observer(HomeScreen));
+export default observer(HomeScreen);

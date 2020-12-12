@@ -1,6 +1,5 @@
-import React, {FunctionComponent} from 'react';
-import {inject, observer} from 'mobx-react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import React, {FunctionComponent, useContext} from 'react';
+import {TouchableOpacity} from 'react-native';
 import {
   Header,
   Title,
@@ -12,13 +11,19 @@ import {
   Thumbnail,
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
+import {observer} from 'mobx-react-lite';
+import {StoreContext} from '../models/Store';
 
-const HeaderComponent: FunctionComponent = ({
-  store,
+interface ScreenHeaderProps {
+  hasMenuButton?: boolean;
+  title: string;
+}
+const ScreenHeader: FunctionComponent<ScreenHeaderProps> = ({
   hasMenuButton = false,
   title = '',
 }) => {
   const navigation = useNavigation();
+  const store = useContext(StoreContext);
   const {isLoginSuccess, avatar, logout} = store;
 
   if (isLoginSuccess !== true) {
@@ -52,6 +57,4 @@ const HeaderComponent: FunctionComponent = ({
   );
 };
 
-const styles = StyleSheet.create({});
-
-export default inject('store')(observer(HeaderComponent));
+export default observer(ScreenHeader);

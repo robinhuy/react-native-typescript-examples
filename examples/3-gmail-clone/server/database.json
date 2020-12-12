@@ -6,9 +6,49 @@
     {
       "id": 1,
       "name": "Robin Huy",
-      "email": "robin@techmaster",
+      "email": "robin@techmaster.vn",
       "password": "123456",
       "avatar": "https://avatars0.githubusercontent.com/u/12640832?s=460&u=a57e7a0a0f8f0b7740adb942e2d76e599cbd217b&v=4"
+    }
+  ],
+  "emails": [
+    {
+      "id": 3,
+      "sender": "Team DigitalOcean",
+      "title": "The DigitalOcean Newsletter",
+      "time": "06:06 pm",
+      "isRead": true,
+      "isStarred": true,
+      "content": "<h1>The DigitalOcean Newsletter</h1>"
+    },
+    {
+      "id": 2,
+      "sender": "Twitter",
+      "title": "Check your notfication on Twitter",
+      "time": "09:07 am",
+      "isRead": true,
+      "isStarred": true,
+      "content": "<h1>Check your notfication on Twitter</h1>"
+    }
+  ],
+  "trashEmails": [
+    {
+      "id": 1,
+      "sender": "Medium Daily Digest",
+      "title": "3 Shortcuts to High-Level Thinking",
+      "time": "03:43 am",
+      "isRead": false,
+      "isStarred": false,
+      "content": "<h1>3 Shortcuts to High-Level Thinking</h1>"
+    },
+    {
+      "id": 4,
+      "sender": "Medium Daily Digest",
+      "title": "4 Shortcuts to High-Level Thinking",
+      "time": "04:44 pm",
+      "isRead": true,
+      "isStarred": false,
+      "content": "<h1>4 Shortcuts to High-Level Thinking</h1>"
     }
   ]
 }

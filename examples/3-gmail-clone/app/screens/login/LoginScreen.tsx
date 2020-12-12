@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {StyleSheet, View, TouchableOpacity, Image, Alert} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 import {
   Container,
   Header,
@@ -13,7 +13,7 @@ import {
   Text,
 } from 'native-base';
 
-import LoginForm from '../components/LoginForm';
+import LoginForm from './LoginForm';
 
 const LoginScreen: FunctionComponent = () => {
   return (
@@ -26,12 +26,9 @@ const LoginScreen: FunctionComponent = () => {
         <Right />
       </Header>
 
-      <Content style={{backgroundColor: '#f0f0f0', padding: 10}}>
+      <Content style={styles.container}>
         <View style={styles.headerSection}>
-          <Image
-            style={styles.logo}
-            source={require('../img/google-logo.png')}
-          />
+          <Image style={styles.logo} source={require('./google-logo.png')} />
 
           <Button block danger style={{width: 100}}>
             <Text>Sign up</Text>
@@ -42,8 +39,8 @@ const LoginScreen: FunctionComponent = () => {
 
         <LoginForm />
 
-        <TouchableOpacity onPress={() => Alert.alert('Building ...')}>
-          <Text style={{color: '#658fd9', marginTop: 15}}>
+        <TouchableOpacity>
+          <Text style={styles.forgotPasswordText}>
             Can't access your account?
           </Text>
         </TouchableOpacity>
@@ -52,7 +49,7 @@ const LoginScreen: FunctionComponent = () => {
       <Footer style={{backgroundColor: '#f0f0f0'}}>
         <Left />
         <Body>
-          <Text style={{color: '#696969'}}>© 2020 Google</Text>
+          <Text style={{color: '#696969'}}>© 2021 Google</Text>
         </Body>
         <Right />
       </Footer>
@@ -61,6 +58,10 @@ const LoginScreen: FunctionComponent = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+  },
   headerSection: {
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -69,6 +70,10 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 57,
+  },
+  forgotPasswordText: {
+    color: '#658fd9',
+    marginTop: 15,
   },
   separator: {
     borderBottomColor: '#ddd',

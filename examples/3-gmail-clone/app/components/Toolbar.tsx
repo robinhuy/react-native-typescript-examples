@@ -1,9 +1,15 @@
-import React, {FunctionComponent} from 'react';
-import {inject, observer} from 'mobx-react';
-import {StyleSheet, Platform} from 'react-native';
+import React, {FunctionComponent, useContext} from 'react';
+import {Platform} from 'react-native';
 import {Header, Left, Body, Right, Icon, Button, Text} from 'native-base';
+import {observer} from 'mobx-react-lite';
+import {StoreContext} from '../models/Store';
 
-const Toolbar: FunctionComponent = ({store, category}) => {
+interface ToolbarProps {
+  category: string;
+}
+
+const Toolbar: FunctionComponent<ToolbarProps> = ({category}) => {
+  const store = useContext(StoreContext);
   const {
     setShowToolbar,
     checkedEmails,
@@ -49,6 +55,4 @@ const Toolbar: FunctionComponent = ({store, category}) => {
   );
 };
 
-const styles = StyleSheet.create({});
-
-export default inject('store')(observer(Toolbar));
+export default observer(Toolbar);

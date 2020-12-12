@@ -1,10 +1,10 @@
 import React, {useState, useEffect, FunctionComponent} from 'react';
 import {StyleSheet, View} from 'react-native';
 
-import Header from '../components/Header';
-import QuestionBox from '../components/QuestionBox';
-import AnswerBox from '../components/AnswerBox';
-import ResultModal from '../components/ResultModal';
+import Header from './game-screen-components/Header';
+import QuestionBox from './game-screen-components/QuestionBox';
+import AnswerBox from './game-screen-components/AnswerBox';
+import ResultModal from './game-screen-components/ResultModal';
 
 import {questions} from '../mockdata.json';
 

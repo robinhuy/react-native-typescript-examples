@@ -1,12 +1,12 @@
-import React, {FunctionComponent} from 'react';
-import {inject, observer} from 'mobx-react';
-import {StyleSheet} from 'react-native';
+import React, {FunctionComponent, useContext} from 'react';
 import {Container} from 'native-base';
 import {WebView} from 'react-native-webview';
+import {observer} from 'mobx-react-lite';
+import {StoreContext} from '../models/Store';
+import ScreenHeader from '../components/ScreenHeader';
 
-import HeaderComponent from '../components/HeaderComponent';
-
-const DetailScreen: FunctionComponent = ({store}) => {
+const DetailScreen: FunctionComponent = () => {
+  const store = useContext(StoreContext);
   const {emailContent} = store;
 
   const styleTag = `
@@ -27,13 +27,11 @@ const DetailScreen: FunctionComponent = ({store}) => {
 
   return (
     <Container>
-      <HeaderComponent title="" />
+      <ScreenHeader title="" />
 
       <WebView source={{html: htmlContent}} />
     </Container>
   );
 };
 
-const styles = StyleSheet.create({});
-
-export default inject('store')(observer(DetailScreen));
+export default observer(DetailScreen);

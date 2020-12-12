@@ -1,12 +1,14 @@
-import React, {FunctionComponent, useState} from 'react';
-import {inject, observer} from 'mobx-react';
+import React, {FunctionComponent, useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Item, Button, Text} from 'native-base';
-
 import {useNavigation} from '@react-navigation/native';
+import {observer} from 'mobx-react-lite';
+import {StoreContext} from '../../models/Store';
 
-const LoginForm: FunctionComponent = ({store}) => {
-  const [username, setUsername] = useState('');
+const LoginForm: FunctionComponent = () => {
+  const store = useContext(StoreContext);
+
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const {login, isLoginSuccess} = store;
@@ -21,14 +23,16 @@ const LoginForm: FunctionComponent = ({store}) => {
       <Text style={styles.title}>Sign In</Text>
 
       {isLoginSuccess === false && (
-        <Text style={styles.errorMsg}>Invalid username or password</Text>
+        <Text style={styles.errorMsg}>Invalid email or password</Text>
       )}
 
       <Item regular style={styles.item}>
         <Input
-          placeholder="Username"
+          placeholder="Email"
+          autoCapitalize="none"
           style={styles.input}
-          onChangeText={(text) => setUsername(text)}
+          value={email}
+          onChangeText={setEmail}
         />
       </Item>
 
@@ -38,7 +42,8 @@ const LoginForm: FunctionComponent = ({store}) => {
           secureTextEntry={true}
           placeholder="Password"
           style={styles.input}
-          onChangeText={(text) => setPassword(text)}
+          value={password}
+          onChangeText={setPassword}
         />
       </Item>
 
@@ -46,7 +51,7 @@ const LoginForm: FunctionComponent = ({store}) => {
         block
         primary
         style={{width: 150}}
-        onPress={() => login(username, password)}>
+        onPress={() => login(email, password)}>
         <Text>Sign In</Text>
       </Button>
     </View>
@@ -77,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject('store')(observer(LoginForm));
+export default observer(LoginForm);
