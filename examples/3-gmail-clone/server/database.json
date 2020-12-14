@@ -1,6 +1,26 @@
 {
   "protected_resources": {
-    "users": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    "users": [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ],
+    "emails": [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ],
+    "trashEmails": [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ]
   },
   "users": [
     {
@@ -29,9 +49,7 @@
       "isRead": true,
       "isStarred": true,
       "content": "<h1>Check your notfication on Twitter</h1>"
-    }
-  ],
-  "trashEmails": [
+    },
     {
       "id": 1,
       "sender": "Medium Daily Digest",
@@ -40,7 +58,9 @@
       "isRead": false,
       "isStarred": false,
       "content": "<h1>3 Shortcuts to High-Level Thinking</h1>"
-    },
+    }
+  ],
+  "trashEmails": [
     {
       "id": 4,
       "sender": "Medium Daily Digest",

@@ -20,22 +20,37 @@ class Store {
   token: string = '';
   avatar: string = DEFAULT_AVATAR;
   emails: Email[] = [];
-  checkedEmails: Email[] = [];
+  checkedEmailIds: number[] = [];
   isShowToolbar: boolean = false;
   emailContent: string = '';
 
   constructor() {
     makeAutoObservable(this);
 
+    // Add authorization request header
+    api.addRequestTransform((request) => {
+      if (this.token) {
+        request.headers.Authorization = 'Bearer ' + this.token;
+      }
+    });
+
+    // Handle unauthorized request
+    api.addResponseTransform((response) => {
+      if (response.data === 'Unauthorized') {
+        this.logout();
+      }
+    });
+
+    // Check user logged in
     (async () => {
       try {
         const loginToken = await AsyncStorage.getItem(LOGIN_KEY);
         const avatar = await AsyncStorage.getItem(AVATAR_KEY);
 
         if (loginToken !== '') {
-          this.isLoginSuccess = true;
-          this.setAvatar(avatar || '');
-          this.token = loginToken || '';
+          this.setLoginSuccess(true);
+          this.setAvatar(avatar);
+          this.setToken(loginToken);
         }
       } catch (e) {
         console.log(e);
@@ -47,8 +62,31 @@ class Store {
     this.isLoginSuccess = result;
   };
 
-  setAvatar = (avatar: string) => {
+  setToken = (token: string | null | undefined) => {
+    this.token = token || '';
+  };
+
+  setAvatar = (avatar: string | null | undefined) => {
     this.avatar = avatar || DEFAULT_AVATAR;
+  };
+
+  setShowToolbar = (data: boolean) => {
+    this.isShowToolbar = data;
+  };
+
+  setEmails = (emails: Email[] | string | undefined) => {
+    if (!Array.isArray(emails)) {
+      emails = [];
+    }
+    this.emails = emails;
+  };
+
+  setCheckedEmailIds = (ids: number[]) => {
+    this.checkedEmailIds = ids;
+  };
+
+  setEmailContent = (data: string) => {
+    this.emailContent = data;
   };
 
   login = async (email: string, password: string) => {
@@ -57,8 +95,8 @@ class Store {
     if (res.ok) {
       const user = res.data;
       this.setLoginSuccess(true);
-      this.setAvatar(user?.avatar || '');
-      this.token = user?.token || '';
+      this.setAvatar(user?.avatar);
+      this.setToken(user?.token);
       AsyncStorage.setItem(LOGIN_KEY, user?.token || '');
       AsyncStorage.setItem(AVATAR_KEY, user?.avatar || '');
     } else {
@@ -73,31 +111,20 @@ class Store {
     AsyncStorage.setItem(AVATAR_KEY, '');
   };
 
-  setEmails = (emails: Email[]) => {
-    this.emails = emails;
-  };
-
   getEmails = async (category: string) => {
-    const result = await fetch(`${DOMAIN}/${category}`);
-    const emails = await result.json();
-    this.emails = emails;
+    const res = await api.get<Email[] | string>(`/${category}`);
+
+    if (res.ok) {
+      this.setEmails(res.data);
+    }
   };
 
-  updateEmail = async (category: string, email: string) => {
-    const result = await fetch(`${DOMAIN}/${category}/${email.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + this.token,
-      },
-      body: JSON.stringify(email),
-    });
+  updateEmail = async (category: string, email: Email) => {
+    const res = await api.put<Email>(`/${category}/${email.id}`, email);
 
-    if (result.status == 401) {
-      this.logout();
+    if (res.ok) {
+      return res.data;
     }
-
-    return result;
   };
 
   moveEmails = async (
@@ -107,16 +134,9 @@ class Store {
   ) => {
     const result = await Promise.all(
       emails.map((email) =>
-        fetch(`${DOMAIN}/${toCategory}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + this.token,
-          },
-          body: JSON.stringify(email),
-        }).then(() =>
-          fetch(`${DOMAIN}/${fromCategory}/${email.id}`, {method: 'DELETE'}),
-        ),
+        api.post(`/${toCategory}`, email).then(() => {
+          api.delete(`/${fromCategory}/${email.id}`);
+        }),
       ),
     );
 
@@ -127,7 +147,7 @@ class Store {
     let selectedEmails = [];
     let unselectedEmails = [];
     for (let item of this.emails) {
-      if (this.checkedEmails.includes(item.id)) {
+      if (this.checkedEmailIds.includes(item.id)) {
         selectedEmails.push(item);
       } else {
         unselectedEmails.push(item);
@@ -137,11 +157,11 @@ class Store {
     await this.moveEmails(fromCategory, toCategory, selectedEmails);
 
     this.setEmails(unselectedEmails);
-    this.setCheckedEmails([]);
+    this.setCheckedEmailIds([]);
     this.setShowToolbar(false);
   };
 
-  toggleStar = async (category: string, emailId: string) => {
+  toggleStar = async (category: string, emailId: number) => {
     this.emails = this.emails.map((email) => {
       if (email.id === emailId) {
         email.isStarred = !email.isStarred;
@@ -152,32 +172,20 @@ class Store {
     });
   };
 
-  setCheckedEmails = (emails: Email[]) => {
-    this.checkedEmails = emails;
-  };
-
-  setShowToolbar = (data: boolean) => {
-    this.isShowToolbar = data;
-  };
-
-  checkEmail = (emailId: string) => {
-    const indexOfCheckedEmail = this.checkedEmails.indexOf(emailId);
+  checkEmail = (emailId: number) => {
+    const indexOfCheckedEmail = this.checkedEmailIds.indexOf(emailId);
 
     if (indexOfCheckedEmail !== -1) {
-      this.checkedEmails.splice(indexOfCheckedEmail, 1);
+      this.checkedEmailIds.splice(indexOfCheckedEmail, 1);
     } else {
-      this.checkedEmails.push(emailId);
+      this.checkedEmailIds.push(emailId);
     }
 
-    if (this.checkedEmails.length === 0) {
+    if (this.checkedEmailIds.length === 0) {
       this.setShowToolbar(false);
     } else {
       this.setShowToolbar(true);
     }
-  };
-
-  setEmailContent = (data: string) => {
-    this.emailContent = data;
   };
 }
 

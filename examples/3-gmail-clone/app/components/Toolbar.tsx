@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useContext} from 'react';
-import {Platform} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {Header, Left, Body, Right, Icon, Button, Text} from 'native-base';
 import {observer} from 'mobx-react-lite';
 import {StoreContext} from '../models/Store';
@@ -12,14 +12,14 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({category}) => {
   const store = useContext(StoreContext);
   const {
     setShowToolbar,
-    checkedEmails,
-    setCheckedEmails,
+    checkedEmailIds,
+    setCheckedEmailIds,
     moveSelectedEmails,
   } = store;
 
   function hideToolbar() {
     setShowToolbar(false);
-    setCheckedEmails([]);
+    setCheckedEmailIds([]);
   }
 
   return (
@@ -31,9 +31,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({category}) => {
       </Left>
 
       <Body>
-        <Text style={{color: Platform.OS === 'ios' ? '#000' : '#fff'}}>
-          {checkedEmails.length}
-        </Text>
+        <Text style={styles.countText}>{checkedEmailIds.length}</Text>
       </Body>
 
       <Right>
@@ -54,5 +52,13 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({category}) => {
     </Header>
   );
 };
+
+const styles = StyleSheet.create({
+  countText: {
+    color: Platform.OS === 'ios' ? '#000' : '#fff',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+});
 
 export default observer(Toolbar);

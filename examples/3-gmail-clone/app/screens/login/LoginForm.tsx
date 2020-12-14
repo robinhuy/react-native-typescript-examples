@@ -6,13 +6,12 @@ import {observer} from 'mobx-react-lite';
 import {StoreContext} from '../../models/Store';
 
 const LoginForm: FunctionComponent = () => {
+  const navigation = useNavigation();
   const store = useContext(StoreContext);
+  const {login, isLoginSuccess} = store;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const {login, isLoginSuccess} = store;
-  const navigation = useNavigation();
 
   if (isLoginSuccess === true) {
     navigation.navigate('Main');

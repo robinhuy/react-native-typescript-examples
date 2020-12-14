@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useContext} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, TouchableOpacity} from 'react-native';
 import {ListItem, Left, Body, Right, CheckBox, Text, Icon} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import {observer} from 'mobx-react-lite';
@@ -17,7 +17,7 @@ const EmailListItem: FunctionComponent<EmailListItemProps> = ({
 }) => {
   const navigation = useNavigation();
   const store = useContext(StoreContext);
-  const {checkedEmails, checkEmail, toggleStar, setEmailContent} = store;
+  const {checkedEmailIds, checkEmail, toggleStar, setEmailContent} = store;
 
   function goToDetailScreen() {
     setEmailContent(item.content);
@@ -28,15 +28,19 @@ const EmailListItem: FunctionComponent<EmailListItemProps> = ({
     <ListItem noIndent style={{backgroundColor: '#fff'}}>
       <Left style={styles.left}>
         <CheckBox
-          checked={checkedEmails.includes(item.id)}
+          checked={checkedEmailIds.includes(item.id)}
           onPress={() => checkEmail(item.id)}
-          style={{left: 0}}
+          style={
+            Platform.OS === 'android'
+              ? styles.checkBoxAndroid
+              : styles.checkBoxIos
+          }
         />
       </Left>
 
       <Body style={styles.body}>
-        <TouchableOpacity onPress={() => goToDetailScreen()}>
-          <Text>{item.sender}</Text>
+        <TouchableOpacity onPress={goToDetailScreen}>
+          <Text style={{marginBottom: 5}}>{item.sender}</Text>
           <Text note>{item.title}</Text>
         </TouchableOpacity>
       </Body>
@@ -46,7 +50,7 @@ const EmailListItem: FunctionComponent<EmailListItemProps> = ({
         <Icon
           name={item.isStarred ? 'star' : 'star-outline'}
           style={[
-            {fontSize: 30},
+            styles.starIcon,
             {color: item.isStarred ? '#ffd153' : '#e2e2e2'},
           ]}
           onPress={() => toggleStar(category, item.id)}
@@ -67,6 +71,23 @@ const styles = StyleSheet.create({
     flex: 3,
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  checkBoxAndroid: {
+    left: 2,
+    paddingLeft: 0,
+  },
+  checkBoxIos: {
+    left: -10,
+    width: 38,
+    height: 38,
+    borderRadius: 38,
+    paddingLeft: 5,
+    paddingTop: 10,
+    transform: [{scale: 0.6}],
+  },
+  starIcon: {
+    fontSize: 26,
+    marginTop: 4,
   },
 });
 
