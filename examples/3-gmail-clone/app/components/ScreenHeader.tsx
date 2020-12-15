@@ -24,11 +24,7 @@ const ScreenHeader: FunctionComponent<ScreenHeaderProps> = ({
 }) => {
   const navigation = useNavigation();
   const store = useContext(StoreContext);
-  const {isLoginSuccess, avatar, logout} = store;
-
-  if (isLoginSuccess !== true) {
-    navigation.navigate('Login');
-  }
+  const {avatar, logout} = store;
 
   return (
     <Header>
@@ -49,7 +45,7 @@ const ScreenHeader: FunctionComponent<ScreenHeaderProps> = ({
       </Body>
 
       <Right>
-        <TouchableOpacity onPress={() => logout()}>
+        <TouchableOpacity onPress={logout}>
           <Thumbnail small source={{uri: avatar}} />
         </TouchableOpacity>
       </Right>

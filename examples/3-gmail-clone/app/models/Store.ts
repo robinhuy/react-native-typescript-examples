@@ -1,10 +1,9 @@
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable, runInAction} from 'mobx';
 import {createContext} from 'react';
 import {create} from 'apisauce';
 import AsyncStorage from '@react-native-community/async-storage';
 import {Email, User} from './models';
 
-const DOMAIN = 'http://192.168.1.194:3000';
 const LOGIN_KEY = 'loginToken';
 const AVATAR_KEY = 'avatar';
 const DEFAULT_AVATAR =
@@ -16,6 +15,7 @@ const api = create({
 });
 
 class Store {
+  isLoading: boolean = true;
   isLoginSuccess: boolean | null = null;
   token: string = '';
   avatar: string = DEFAULT_AVATAR;
@@ -47,7 +47,7 @@ class Store {
         const loginToken = await AsyncStorage.getItem(LOGIN_KEY);
         const avatar = await AsyncStorage.getItem(AVATAR_KEY);
 
-        if (loginToken !== '') {
+        if (loginToken) {
           this.setLoginSuccess(true);
           this.setAvatar(avatar);
           this.setToken(loginToken);
@@ -55,6 +55,8 @@ class Store {
       } catch (e) {
         console.log(e);
       }
+
+      runInAction(() => (this.isLoading = false));
     })();
   }
 

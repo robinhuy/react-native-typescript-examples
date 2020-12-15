@@ -1,21 +1,15 @@
 import React, {FunctionComponent, useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Item, Button, Text} from 'native-base';
-import {useNavigation} from '@react-navigation/native';
 import {observer} from 'mobx-react-lite';
 import {StoreContext} from '../../models/Store';
 
 const LoginForm: FunctionComponent = () => {
-  const navigation = useNavigation();
   const store = useContext(StoreContext);
   const {login, isLoginSuccess} = store;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  if (isLoginSuccess === true) {
-    navigation.navigate('Main');
-  }
 
   return (
     <View>
