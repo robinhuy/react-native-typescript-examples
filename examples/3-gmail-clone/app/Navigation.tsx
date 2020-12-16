@@ -22,17 +22,9 @@ const MyTheme = {
 const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{headerShown: false}}
-      />
-      <HomeStack.Screen
-        name="Detail"
-        component={DetailScreen}
-        options={{headerShown: false}}
-      />
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Detail" component={DetailScreen} />
     </HomeStack.Navigator>
   );
 }
@@ -40,17 +32,9 @@ function HomeStackScreen() {
 const TrashStack = createStackNavigator();
 function TrashStackScreen() {
   return (
-    <TrashStack.Navigator>
-      <TrashStack.Screen
-        name="Trash"
-        component={TrashScreen}
-        options={{headerShown: false}}
-      />
-      <TrashStack.Screen
-        name="Detail"
-        component={DetailScreen}
-        options={{headerShown: false}}
-      />
+    <TrashStack.Navigator screenOptions={{headerShown: false}}>
+      <TrashStack.Screen name="Trash" component={TrashScreen} />
+      <TrashStack.Screen name="Detail" component={DetailScreen} />
     </TrashStack.Navigator>
   );
 }
@@ -76,19 +60,11 @@ const Navigation: FunctionComponent = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <MainStack.Navigator>
+      <MainStack.Navigator screenOptions={{headerShown: false}}>
         {store.isLoginSuccess === null ? (
-          <MainStack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{headerShown: false}}
-          />
+          <MainStack.Screen name="Login" component={LoginScreen} />
         ) : (
-          <MainStack.Screen
-            name="Main"
-            component={HomeDrawerScreen}
-            options={{headerShown: false}}
-          />
+          <MainStack.Screen name="Main" component={HomeDrawerScreen} />
         )}
       </MainStack.Navigator>
     </NavigationContainer>

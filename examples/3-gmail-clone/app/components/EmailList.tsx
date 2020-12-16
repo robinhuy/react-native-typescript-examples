@@ -1,6 +1,6 @@
-import React, {FunctionComponent, useContext, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Icon} from 'native-base';
+import React, {FunctionComponent, useContext} from 'react';
+import {Alert, StyleSheet, TouchableOpacity} from 'react-native';
+import {Icon, View, Text} from 'native-base';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {observer} from 'mobx-react-lite';
 import {StoreContext} from '../models/Store';
@@ -13,27 +13,38 @@ interface EmailListProps {
 
 const EmailList: FunctionComponent<EmailListProps> = ({category}) => {
   const store = useContext(StoreContext);
-  const {emails, getEmails} = store;
 
-  useEffect(() => {
-    getEmails(category);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  function archiveEmail() {
+    Alert.alert('Email was archived successfully!');
+  }
+
+  if (store.emails.length === 0) {
+    return (
+      <View style={{padding: 15}}>
+        <Text>No email in the box!</Text>
+      </View>
+    );
+  }
 
   return (
     <SwipeListView
-      data={emails}
+      data={store.emails}
       renderItem={(data) => (
         <EmailListItem item={data.item} category={category} />
       )}
       renderHiddenItem={() => (
         <View style={styles.swipeListHiddenItem}>
-          <View style={styles.swipeListHiddenIconWrapper}>
+          <TouchableOpacity
+            style={styles.swipeListHiddenIconWrapper}
+            onPress={archiveEmail}>
             <Icon name="archive" style={styles.swipeListHiddenIcon} />
-          </View>
-          <View style={styles.swipeListHiddenIconWrapper}>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.swipeListHiddenIconWrapper}
+            onPress={archiveEmail}>
             <Icon name="archive" style={styles.swipeListHiddenIcon} />
-          </View>
+          </TouchableOpacity>
         </View>
       )}
       keyExtractor={(item: Email) => item.id?.toString()}

@@ -34,41 +34,41 @@
   "emails": [
     {
       "id": 3,
-      "sender": "Team DigitalOcean",
-      "title": "The DigitalOcean Newsletter",
+      "sender": "Firebase",
+      "title": "Cloud Storage for Firebase",
       "time": "06:06 pm",
       "isRead": true,
       "isStarred": true,
-      "content": "<h1>The DigitalOcean Newsletter</h1>"
+      "content": "<div style=\"vertical-align:top;padding:30px 25px;font-weight:400;font-size:14px;line-height:22px;color:#455a64\"><div style=\"color:#263238;font-weight:700;font-size:20px;font-family:Google Sans,Roboto,sans-serif;line-height:26px;padding:0 0\"> Hi Robin,</div><p>We are updating our product API for Cloud Storage for Firebase to provide more security, so that each Firebase project has its own dedicated Storage service account. You will see our API enabled and added service account(s) on your project(s) <strong>by December 1, 2020.</strong></p><div style=\"padding:20px 0 0\"> Thanks,</div><div style=\"color:#263238;font-weight:700;font-size:14px;line-height:20px\"> Ke on behalf of the Firebase team</div></div>"
     },
     {
       "id": 2,
-      "sender": "Twitter",
-      "title": "Check your notfication on Twitter",
+      "sender": "Google Analytics",
+      "title": "Discover the latest updates to Google Analytics",
       "time": "09:07 am",
       "isRead": true,
       "isStarred": true,
-      "content": "<h1>Check your notfication on Twitter</h1>"
+      "content": "<div style=\"padding: 20px;\"><h2 style=\"text-align:center;font-size:24px;padding-left:2px;display:block;font-family:Google Sans,Roboto,Helvetica,Arial,sans-serif;line-height:32px;color:#3c4043;font-weight:400\">August 2020 - Product Update</h2><div style=\"padding-top:25px; text-align: center;\"><img style=\"max-width:100%\" alt=\"Product Update\" src=\"https://ci6.googleusercontent.com/proxy/wrHuyaQma2FHvEWATd56pIa-5UMKOCzMxcRW2ckQhxPHXCXxSPoOf_5wFeYX9f1PsuE_lqiZ6R3MVuqCbw30i98HCjkAQCqbNiB5fc1tobPsmvq-UEsve9iq_bVepUr27wI2w5sKc3joRR8joQ=s0-d-e1-ft#http://services.google.com/fh/files/emails/009_google_analytics_solutions_header4_copy.png\" width=\"554\"></div><div style=\"margin:0px;padding:0px;font-weight:bold;font-size:16px;line-height:26px;color:#4285f4;text-transform:uppercase;padding-left:30px;padding-top:23px;font-family:Roboto,sans-serif\">PRODUCT &amp; FEATURE HIGHLIGHTS</div><div align=\"left\" style=\"color:#ffffff;font-family:'Roboto Light',Arial,sans-serif;margin:0;padding:0 30px\"><h2 style=\"font-size:16px;margin-bottom:10px;color:#5f6368;font-size:16px;line-height:26px;font-weight:bold;background-color:white;font-family:Roboto,sans-serif\">Improve Performance and Security With Server-Side Tagging</h2><p style=\"font-weight:400;font-size:16px;line-height:26px;color:#5f6368;margin:0 0 20px;padding:0;font-family:Roboto,sans-serif\">We are introducing Server-Side Tagging to Google Tag Manager and Tag Manager 360. You'll now be able to move many third-party tags off your site and into a new server container hosted in your Google Cloud account. That means when customers interact with a page on your site, third-party tags are loaded directly in the server container rather than the site.</p><p style=\"margin:0;height:31px;width:135px;text-align:center;background-color:#fff\"><a href=\"https://www.google.com/appserve/mkt/p/AD-FnExIvvUIRYzLvNaYUW8kfOuwqfsEbBqNE4pJ7zu-00JZwp94HusPgD8RMw8EXgQ8avZdGVHi0hoRcl2H5tx4l6G_KkbniI4aNq8m6rAxLNZK3daQGbkYLq5n7znpU8Ho_fG6evJTfbPd5lc5WJXA_eETrCW67L8VBugJsp9avL-1EjEJwQpGUH-RtuyzuJlFKdtiYdbfS7lFG05heTS6mHV9g4ku3AathFWcQt2bOwLq1AeYQPc148P6b8PSPdK4XwrJl26mpYNC_0Of3-VtJxFAvDzOj8Jlroi5JhQ_rwyyJqnbwdAktIzq9ELswhScHwmiaA\" style=\"background-color:#4285f4;margin:0;text-decoration:none;text-transform:uppercase;font-family:'Roboto',Arial,sans-serif;font-weight:bold;font-size:16px;color:#ffffff;display:inline-block;border-radius:4px\" target=\"_blank\"><span style=\"display:block;width:158px!important;line-height:40px\">LEARN MORE</span> </a></p></div></div>"
     },
     {
-      "id": 1,
-      "sender": "Medium Daily Digest",
-      "title": "3 Shortcuts to High-Level Thinking",
-      "time": "03:43 am",
-      "isRead": false,
+      "id": 4,
+      "sender": "Postgres Weekly",
+      "title": "The tale of two little regexes",
+      "time": "04:44 pm",
+      "isRead": true,
       "isStarred": false,
-      "content": "<h1>3 Shortcuts to High-Level Thinking</h1>"
+      "content": "<p style=\"text-align:center;font-size:1.8em;font-weight:600;line-height:1.0em;margin-top:0.8em;margin-bottom:0.8em\">Postgres Weekly</p> <img src=\"https://ci6.googleusercontent.com/proxy/tvHwURkVyw0aJ5Tw1t7qy50EP_pEk0VLX3Rcz6d1DM2jMYrohWNKo9M36hDj4H1NUUgw2nvZok21dMKqOMSecqx-V01vCOVny5HcL6QqdnrNK7nWRWBvX-uBX_KKHShGP2yuZfKScbSU1eHfAXt3_IS5fbE5r5QQrZI=s0-d-e1-ft#https://res.cloudinary.com/cpress/image/upload/w_1280,e_sharpen:60/v1607518322/d1nj838ojgba9lfbq8hr.png\" style=\"border-bottom-color:#0088bb;border-bottom-style:solid;outline:none;height:auto;text-decoration:none;max-width:100%;line-height:100%;width:100%;border-width:0 0 3px\" class=\"CToWUd\"><div style=\"font-family:-apple-system,BlinkMacSystemFont,Helvetica,sans-serif;font-size:15px;line-height:1.55em;border-collapse:collapse;padding:0px 15px\"><p style=\"color:#444;margin-top:0.8em;margin-bottom:0;font-size:1.05em\"><span style=\"font-weight:600;font-size:1.1em;color:#000\"><a href=\"https://postgresweekly.com/link/99941/da9b8471f8\" title=\"blog.coinbase.com\" style=\"text-decoration:none;color:#0088bb;font-size:1.1em;line-height:1.4em\" target=\"_blank\">A Seamless MongoDB to PostgreSQL Migration</a></span> — Coinbase is a large digital currency exchange so having a solid foundation for its data is a must. Here they share some lessons learned from a large cross-database data migration to AWS RDS&nbsp;PostgreSQL.</p><p style=\"color:#5a5a5a;margin-top:4px;margin-bottom:0.8em;text-transform:uppercase;font-size:12px;line-height:1.2em\">Alex Ghise (Coinbase)</p></div><div style=\"font-family:-apple-system,BlinkMacSystemFont,Helvetica,sans-serif;font-size:15px;line-height:1.55em;border-collapse:collapse;padding:0px 15px\"><p style=\"color:#444;margin-top:0.8em;margin-bottom:0\"><span style=\"font-weight:600;font-size:1.1em;color:#000\"><a href=\"https://postgresweekly.com/link/99942/da9b8471f8\" style=\"text-decoration:none;color:#0088bb;font-size:1.05em\" target=\"_blank\">Replacing Lines of Code with 2 Little Regexes in Postgres</a></span> — I love them but the term ‘regular expression’ admittedly sends many developers running for the hills. Is there a good use for them with Postgres? Yes, and Steve shows one off&nbsp;here.</p><p style=\"color:#5a5a5a;margin-top:4px;margin-bottom:0.8em;text-transform:uppercase;font-size:12px;line-height:1.2em\">Steve Pousty</p></div>"
     }
   ],
   "trashEmails": [
     {
-      "id": 4,
-      "sender": "Medium Daily Digest",
-      "title": "4 Shortcuts to High-Level Thinking",
-      "time": "04:44 pm",
-      "isRead": true,
+      "id": 1,
+      "sender": "Node Weekly",
+      "title": "Spelunking Node's event loop",
+      "time": "03:43 am",
+      "isRead": false,
       "isStarred": false,
-      "content": "<h1>4 Shortcuts to High-Level Thinking</h1>"
+      "content": "<div style=\"padding: 0 20px;\"><p style=\"font-size:2.5em;font-weight:300;line-height:1.0em;color:#fff;margin:14px 0px;padding:0px 16px\">Node Weekly</p><p style=\"color:#444;margin-top:0.8em;margin-bottom:0;line-height:1.6em!important;font-size:15px!important\"><span style=\"font-weight:500!important;font-size:18px!important;color:#000\"><a href=\"https://nodeweekly.com/link/100098/f974205042\" style=\"text-decoration:none;color:#20824b;border-bottom-width:1px!important;border-bottom-color:#ddd!important;border-bottom-style:solid!important;font-size:1.1em;line-height:1.4em\" target=\"_blank\">An Introduction to Event Loop Utilization</a></span> — Trevor Norris of the core Node.js team has put together a neat writeup of what he’s discovered by measuring and tracking what the event loop is doing. Gets very technical fast, but you might enjoy this brief trip to a fundamental piece of the Node&nbsp;runtime.</p><p style=\"color:#444;margin-top:0.8em;margin-bottom:0;line-height:1.6em!important;font-size:15px!important\"><span style=\"font-weight:500!important;font-size:18px!important;color:#000\"><a href=\"https://nodeweekly.com/link/100099/f974205042\" style=\"text-decoration:none;color:#20824b;border-bottom-width:1px!important;border-bottom-color:#ddd!important;border-bottom-style:solid!important\" target=\"_blank\">Node v15.4.0 (Current) Released</a></span> — Nothing huge here, but <code style=\"background-color:#ccffdd\">child_process</code> now <a href=\"https://nodeweekly.com/link/100100/f974205042\" style=\"text-decoration:none;color:#20824b;border-bottom-width:1px!important;border-bottom-color:#ddd!important;border-bottom-style:solid!important\" target=\"_blank\">supports abort signals</a>, as do <a href=\"https://nodeweekly.com/link/100101/f974205042\" style=\"text-decoration:none;color:#20824b;border-bottom-width:1px!important;border-bottom-color:#ddd!important;border-bottom-style:solid!important\" target=\"_blank\">readable streams</a>, the main ICU (Unicode) dependency has been <span>updated</span>, and there’s a <em>“very experimental and definitely not finished”</em> <a href=\"https://nodeweekly.com/link/100102/f974205042\" style=\"text-decoration:none;color:#20824b;border-bottom-width:1px!important;border-bottom-color:#ddd!important;border-bottom-style:solid!important\" target=\"_blank\">BroadcastChannel implementation</a> for worker threads (based upon <a href=\"https://nodeweekly.com/link/100103/f974205042\" style=\"text-decoration:none;color:#20824b;border-bottom-width:1px!important;border-bottom-color:#ddd!important;border-bottom-style:solid!important\" target=\"_blank\">the Web feature of the same&nbsp;name</a>).</p></div>"
     }
   ]
 }
