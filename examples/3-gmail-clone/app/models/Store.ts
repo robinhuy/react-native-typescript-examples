@@ -9,14 +9,16 @@ const AVATAR_KEY = 'avatar';
 const DEFAULT_AVATAR =
   'https://globalplatform.org/wp-content/uploads/2018/03/default-avatar.png';
 
+// https://github.com/infinitered/apisauce
 const api = create({
-  baseURL: 'http://192.168.1.194:3000',
+  baseURL: 'http://localhost:3000',
   headers: {'Content-Type': 'application/json'},
 });
 
 class Store {
-  isLoading: boolean = true;
+  isCheckingLoggedIn: boolean = true;
   isLoginSuccess: boolean | null = null;
+  isLoading: boolean = false;
   token: string = '';
   avatar: string = DEFAULT_AVATAR;
   emails: Email[] = [];
@@ -25,6 +27,7 @@ class Store {
   emailContent: string = '';
 
   constructor() {
+    // https://mobx.js.org/observable-state.html
     makeAutoObservable(this);
 
     // Add authorization request header
@@ -56,7 +59,8 @@ class Store {
         console.log(e);
       }
 
-      runInAction(() => (this.isLoading = false));
+      // https://mobx.js.org/actions.html
+      runInAction(() => (this.isCheckingLoggedIn = false));
     })();
   }
 
@@ -114,11 +118,15 @@ class Store {
   };
 
   getEmails = async (category: string) => {
+    runInAction(() => (this.isLoading = true));
+
     const res = await api.get<Email[] | string>(`/${category}`);
 
     if (res.ok) {
       this.setEmails(res.data);
     }
+
+    runInAction(() => (this.isLoading = false));
   };
 
   updateEmail = async (category: string, email: Email) => {

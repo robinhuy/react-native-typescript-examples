@@ -1,5 +1,6 @@
 import {GOOGLE_MAPS_APIKEY} from './const';
 
+// https://cloud.google.com/maps-platform/maps
 const BASE_URL = 'https://maps.googleapis.com/maps/api/geocode/json?';
 
 export interface GeoCodingResponse {

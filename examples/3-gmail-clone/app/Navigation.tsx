@@ -54,17 +54,17 @@ const MainStack = createStackNavigator();
 const Navigation: FunctionComponent = () => {
   const store = useContext(StoreContext);
 
-  if (store.isLoading) {
+  if (store.isCheckingLoggedIn) {
     return <SplashScreen />;
   }
 
   return (
     <NavigationContainer theme={MyTheme}>
       <MainStack.Navigator screenOptions={{headerShown: false}}>
-        {store.isLoginSuccess === null ? (
-          <MainStack.Screen name="Login" component={LoginScreen} />
-        ) : (
+        {store.isLoginSuccess === true ? (
           <MainStack.Screen name="Main" component={HomeDrawerScreen} />
+        ) : (
+          <MainStack.Screen name="Login" component={LoginScreen} />
         )}
       </MainStack.Navigator>
     </NavigationContainer>

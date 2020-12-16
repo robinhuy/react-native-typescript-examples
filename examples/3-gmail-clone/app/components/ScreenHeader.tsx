@@ -30,11 +30,11 @@ const ScreenHeader: FunctionComponent<ScreenHeaderProps> = ({
     <Header>
       <Left>
         {hasMenuButton ? (
-          <Button transparent onPress={() => navigation.toggleDrawer()}>
+          <Button transparent onPress={navigation.toggleDrawer}>
             <Icon name="menu" />
           </Button>
         ) : (
-          <Button transparent onPress={() => navigation.goBack()}>
+          <Button transparent onPress={navigation.goBack}>
             <Icon name="arrow-back" />
           </Button>
         )}

@@ -11,6 +11,7 @@ const HomeScreen: FunctionComponent = () => {
   const store = useContext(StoreContext);
   const {isShowToolbar, getEmails} = store;
 
+  // https://reactnavigation.org/docs/use-focus-effect/
   useFocusEffect(
     useCallback(() => {
       getEmails('emails');

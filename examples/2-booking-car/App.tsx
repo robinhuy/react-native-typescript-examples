@@ -78,6 +78,7 @@ const App: FunctionComponent = () => {
   }
 
   useEffect(() => {
+    // https://reactnative.dev/docs/keyboard
     Keyboard.addListener('keyboardWillShow', keyboardWillShow);
     Keyboard.addListener('keyboardWillHide', keyboardWillHide);
 
@@ -89,7 +90,9 @@ const App: FunctionComponent = () => {
   }, []);
 
   return (
+    // https://docs.nativebase.io/Components.html#anatomy-headref
     <Container>
+      {/* https://github.com/react-native-maps/react-native-maps */}
       <MapView
         ref={mapViewRef}
         style={styles.map}
@@ -115,6 +118,7 @@ const App: FunctionComponent = () => {
 
         {isBooked && (
           <>
+            {/* https://github.com/bramus/react-native-maps-directions */}
             <MapViewDirections
               origin={startCoordinate}
               destination={destination}

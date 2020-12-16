@@ -9,19 +9,10 @@ const DetailScreen: FunctionComponent = () => {
   const store = useContext(StoreContext);
   const {emailContent} = store;
 
-  const styleTag = `
-    <style>
-      h1 {
-        font-size: 30px;
-      }
-    </style>`;
   const headTag = `
     <head>
-
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-      ${styleTag}
     </head>`;
   const htmlContent = `<html>${headTag}<body>${emailContent}</body></html>`;
 
