@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, {FC} from 'react';
 import {StyleSheet, View, Text, TouchableHighlight, Modal} from 'react-native';
 
 interface ResultModalProps {
@@ -8,7 +8,7 @@ interface ResultModalProps {
   numberQuestions: number;
 }
 
-const ResultModal: FunctionComponent<ResultModalProps> = ({
+const ResultModal: FC<ResultModalProps> = ({
   isVisible,
   restartGame,
   score,

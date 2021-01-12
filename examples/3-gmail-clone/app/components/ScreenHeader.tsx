@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {
   Header,
@@ -18,7 +18,7 @@ interface ScreenHeaderProps {
   hasMenuButton?: boolean;
   title: string;
 }
-const ScreenHeader: FunctionComponent<ScreenHeaderProps> = ({
+const ScreenHeader: FC<ScreenHeaderProps> = ({
   hasMenuButton = false,
   title = '',
 }) => {

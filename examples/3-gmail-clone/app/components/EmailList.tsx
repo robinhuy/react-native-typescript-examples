@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {Alert, StyleSheet, TouchableOpacity} from 'react-native';
 import {Icon, View, Text, Spinner} from 'native-base';
 import {SwipeListView} from 'react-native-swipe-list-view';
@@ -11,7 +11,7 @@ interface EmailListProps {
   category: string;
 }
 
-const EmailList: FunctionComponent<EmailListProps> = ({category}) => {
+const EmailList: FC<EmailListProps> = ({category}) => {
   const store = useContext(StoreContext);
   const {isLoading, emails} = store;
 

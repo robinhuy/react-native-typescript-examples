@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {Header, Left, Body, Right, Icon, Button, Text} from 'native-base';
 import {observer} from 'mobx-react-lite';
@@ -8,7 +8,7 @@ interface ToolbarProps {
   category: string;
 }
 
-const Toolbar: FunctionComponent<ToolbarProps> = ({category}) => {
+const Toolbar: FC<ToolbarProps> = ({category}) => {
   const store = useContext(StoreContext);
   const {
     setShowToolbar,

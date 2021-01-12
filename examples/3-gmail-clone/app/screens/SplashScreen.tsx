@@ -1,7 +1,7 @@
-import React, {FunctionComponent} from 'react';
+import React, {FC} from 'react';
 import {Spinner, View} from 'native-base';
 
-const SplashScreen: FunctionComponent = () => {
+const SplashScreen: FC = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Spinner />

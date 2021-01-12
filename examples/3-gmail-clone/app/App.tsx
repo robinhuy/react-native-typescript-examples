@@ -1,8 +1,8 @@
-import React, {FunctionComponent} from 'react';
+import React, {FC} from 'react';
 import Store, {StoreContext} from './models/Store';
 import Navigation from './Navigation';
 
-const App: FunctionComponent = () => {
+const App: FC = () => {
   return (
     <StoreContext.Provider value={new Store()}>
       <Navigation />

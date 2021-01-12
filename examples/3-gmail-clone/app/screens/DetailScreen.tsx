@@ -1,11 +1,11 @@
-import React, {FunctionComponent, useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {Container} from 'native-base';
 import {WebView} from 'react-native-webview';
 import {observer} from 'mobx-react-lite';
 import {StoreContext} from '../models/Store';
 import ScreenHeader from '../components/ScreenHeader';
 
-const DetailScreen: FunctionComponent = () => {
+const DetailScreen: FC = () => {
   const store = useContext(StoreContext);
   const {emailContent} = store;
 

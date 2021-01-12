@@ -1,10 +1,10 @@
-import React, {FunctionComponent, useContext, useState} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Item, Button, Text} from 'native-base';
 import {observer} from 'mobx-react-lite';
 import {StoreContext} from '../../models/Store';
 
-const LoginForm: FunctionComponent = () => {
+const LoginForm: FC = () => {
   const store = useContext(StoreContext);
   const {login, isLoginSuccess} = store;
 

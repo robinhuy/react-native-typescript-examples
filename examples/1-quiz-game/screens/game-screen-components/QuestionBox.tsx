@@ -1,13 +1,11 @@
-import React, {FunctionComponent} from 'react';
+import React, {FC} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
 interface QuestionBoxProps {
   questionContent: string;
 }
 
-const QuestionBox: FunctionComponent<QuestionBoxProps> = ({
-  questionContent,
-}) => {
+const QuestionBox: FC<QuestionBoxProps> = ({questionContent}) => {
   return (
     <View style={styles.questionContent}>
       <Text style={styles.questionText}>{questionContent}</Text>

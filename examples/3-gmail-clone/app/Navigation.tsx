@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {FunctionComponent, useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -51,7 +51,7 @@ function HomeDrawerScreen() {
 
 const MainStack = createStackNavigator();
 
-const Navigation: FunctionComponent = () => {
+const Navigation: FC = () => {
   const store = useContext(StoreContext);
 
   if (store.isCheckingLoggedIn) {

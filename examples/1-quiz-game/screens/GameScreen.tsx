@@ -1,4 +1,4 @@
-import React, {useState, useEffect, FunctionComponent} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import Header from './game-screen-components/Header';
@@ -10,7 +10,7 @@ import {questions} from '../mockdata.json';
 
 const ANSWER_TIME = 10;
 
-const GameScreen: FunctionComponent = () => {
+const GameScreen: FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [remainingTime, setRemainingTime] = useState(ANSWER_TIME);

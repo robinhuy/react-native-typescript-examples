@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useCallback, useContext} from 'react';
+import React, {FC, useCallback, useContext} from 'react';
 import {Container} from 'native-base';
 import {observer} from 'mobx-react-lite';
 import {StoreContext} from '../models/Store';
@@ -7,7 +7,7 @@ import HeaderComponent from '../components/ScreenHeader';
 import Toolbar from '../components/Toolbar';
 import EmailList from '../components/EmailList';
 
-const TrashScreen: FunctionComponent = () => {
+const TrashScreen: FC = () => {
   const store = useContext(StoreContext);
   const {isShowToolbar, getEmails} = store;
 

@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, {FC} from 'react';
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 import {
   Container,
@@ -15,7 +15,7 @@ import {
 
 import LoginForm from './LoginForm';
 
-const LoginScreen: FunctionComponent = () => {
+const LoginScreen: FC = () => {
   return (
     <Container>
       <Header>

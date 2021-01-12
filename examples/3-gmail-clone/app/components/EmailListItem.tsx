@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {Platform, StyleSheet, TouchableOpacity} from 'react-native';
 import {ListItem, Left, Body, Right, CheckBox, Text, Icon} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
@@ -11,10 +11,7 @@ interface EmailListItemProps {
   category: string;
 }
 
-const EmailListItem: FunctionComponent<EmailListItemProps> = ({
-  item,
-  category,
-}) => {
+const EmailListItem: FC<EmailListItemProps> = ({item, category}) => {
   const navigation = useNavigation();
   const store = useContext(StoreContext);
   const {checkedEmailIds, checkEmail, toggleStar, setEmailContent} = store;

@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useCallback, useContext} from 'react';
+import React, {FC, useCallback, useContext} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import {Container} from 'native-base';
 import {observer} from 'mobx-react-lite';
@@ -7,7 +7,7 @@ import ScreenHeader from '../components/ScreenHeader';
 import Toolbar from '../components/Toolbar';
 import EmailList from '../components/EmailList';
 
-const HomeScreen: FunctionComponent = () => {
+const HomeScreen: FC = () => {
   const store = useContext(StoreContext);
   const {isShowToolbar, getEmails} = store;
 
