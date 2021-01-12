@@ -73,17 +73,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   checkBoxAndroid: {
-    left: 2,
+    left: 3,
     paddingLeft: 0,
   },
   checkBoxIos: {
-    left: -10,
-    width: 38,
-    height: 38,
-    borderRadius: 38,
-    paddingLeft: 5,
-    paddingTop: 10,
-    transform: [{scale: 0.6}],
+    left: 0,
   },
   starIcon: {
     fontSize: 26,

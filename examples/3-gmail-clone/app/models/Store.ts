@@ -11,7 +11,7 @@ const DEFAULT_AVATAR =
 
 // https://github.com/infinitered/apisauce
 const api = create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://192.168.1.111:3000', // Change 192.168.1.111 to your machine IP
   headers: {'Content-Type': 'application/json'},
 });
 
