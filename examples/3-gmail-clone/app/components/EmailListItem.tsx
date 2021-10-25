@@ -16,10 +16,10 @@ const EmailListItem: FC<EmailListItemProps> = ({item, category}) => {
   const store = useContext(StoreContext);
   const {checkedEmailIds, checkEmail, toggleStar, setEmailContent} = store;
 
-  function goToDetailScreen() {
+  const goToDetailScreen = () => {
     setEmailContent(item.content);
     navigation.navigate('Detail');
-  }
+  };
 
   return (
     <ListItem noIndent style={{backgroundColor: '#fff'}}>

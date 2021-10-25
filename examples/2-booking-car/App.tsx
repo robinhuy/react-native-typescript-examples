@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef, useState, useCallback} from 'react';
 import {
   StyleSheet,
   View,
@@ -36,7 +36,7 @@ const App: FC = () => {
   const slideAnimation = useRef(new Animated.Value(0)).current;
   const mapViewRef = useRef(null);
 
-  async function chooseDestination(currentLocation: Region) {
+  const chooseDestination = async (currentLocation: Region) => {
     const {latitude, longitude} = currentLocation;
 
     if (
@@ -53,29 +53,32 @@ const App: FC = () => {
 
     const location = await reverseGeoCoding(latitude, longitude);
     setEndLocation(location.results[0].formatted_address);
-  }
+  };
 
-  function confirmBooking() {
+  const confirmBooking = () => {
     setBooked(true);
     setDestination(endCoordinate);
     Keyboard.dismiss();
-  }
+  };
 
-  function keyboardWillShow(event: KeyboardEvent) {
-    Animated.timing(slideAnimation, {
-      useNativeDriver: true,
-      toValue: -event.endCoordinates.height,
-      duration: 100,
-    }).start();
-  }
+  const keyboardWillShow = useCallback(
+    (event: KeyboardEvent) => {
+      Animated.timing(slideAnimation, {
+        useNativeDriver: true,
+        toValue: -event.endCoordinates.height,
+        duration: 100,
+      }).start();
+    },
+    [slideAnimation],
+  );
 
-  function keyboardWillHide() {
+  const keyboardWillHide = useCallback(() => {
     Animated.timing(slideAnimation, {
       useNativeDriver: true,
       toValue: 0,
       duration: 100,
     }).start();
-  }
+  }, [slideAnimation]);
 
   useEffect(() => {
     // https://reactnative.dev/docs/keyboard
@@ -86,8 +89,7 @@ const App: FC = () => {
       Keyboard.removeListener('keyboardWillShow', keyboardWillShow);
       Keyboard.removeListener('keyboardWillHide', keyboardWillHide);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [keyboardWillHide, keyboardWillShow]);
 
   return (
     // https://docs.nativebase.io/Components.html#anatomy-headref

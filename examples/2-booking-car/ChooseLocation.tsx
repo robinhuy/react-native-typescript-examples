@@ -57,7 +57,7 @@ const ChooseLocation: FC<ChooseLocationProps> = ({
     </TouchableOpacity>
   ));
 
-  async function suggestLocation(value: string, input: number) {
+  const suggestLocation = async (value: string, input: number) => {
     if (value.length > 5) {
       const data = await geoCoding(encodeURIComponent(value));
       setSuggestions(data);
@@ -69,9 +69,9 @@ const ChooseLocation: FC<ChooseLocationProps> = ({
     } else {
       setEndLocation(value);
     }
-  }
+  };
 
-  function setInputValue(item: GeoCodingResponse) {
+  const setInputValue = (item: GeoCodingResponse) => {
     const latitude = item.geometry.location.lat;
     const longitude = item.geometry.location.lng;
 
@@ -94,13 +94,13 @@ const ChooseLocation: FC<ChooseLocationProps> = ({
       longitudeDelta: 0.01,
     };
     mapView?.animateToRegion(target, 300);
-  }
+  };
 
-  function confirm() {
+  const confirm = () => {
     setSuggestions([]);
     Keyboard.dismiss();
     confirmBooking();
-  }
+  };
 
   return (
     <Card>

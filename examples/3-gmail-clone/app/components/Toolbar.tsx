@@ -17,10 +17,10 @@ const Toolbar: FC<ToolbarProps> = ({category}) => {
     moveSelectedEmails,
   } = store;
 
-  function hideToolbar() {
+  const hideToolbar = () => {
     setShowToolbar(false);
     setCheckedEmailIds([]);
-  }
+  };
 
   return (
     <Header>

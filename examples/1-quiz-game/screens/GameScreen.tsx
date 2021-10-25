@@ -1,4 +1,4 @@
-import React, {FC, useState, useEffect} from 'react';
+import React, {FC, useState, useEffect, useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import Header from './game-screen-components/Header';
@@ -18,26 +18,31 @@ const GameScreen: FC = () => {
 
   const question = questions[currentQuestion];
 
-  function checkAnswer(userAnswer: string) {
-    if (question.correctAnswer === userAnswer) {
-      setScore(score + 1);
-    }
+  const checkAnswer = useCallback(
+    (userAnswer: string) => {
+      if (question.correctAnswer === userAnswer) {
+        setScore(score + 1);
+      }
 
-    if (currentQuestion === questions.length - 1) {
-      setShowResult(true);
-      setRemainingTime(0);
-    } else {
-      setCurrentQuestion(currentQuestion + 1);
-      setRemainingTime(ANSWER_TIME);
-    }
-  }
+      if (currentQuestion === questions.length - 1) {
+        setShowResult(true);
+        setRemainingTime(0);
+      } else {
+        setCurrentQuestion(currentQuestion + 1);
+        setRemainingTime(ANSWER_TIME);
+      }
+    },
+    [currentQuestion, question, score],
+  );
 
-  function restartGame() {
+  const restartGame = () => {
     setCurrentQuestion(0);
     setScore(0);
     setShowResult(false);
     setRemainingTime(ANSWER_TIME);
-  }
+  };
+
+  const answerTimeProgress = (remainingTime / ANSWER_TIME) * 100;
 
   useEffect(() => {
     if (remainingTime > 0 && !isShowResult) {
@@ -51,10 +56,7 @@ const GameScreen: FC = () => {
     } else {
       checkAnswer('');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [remainingTime]);
-
-  const answerTimeProgress = (remainingTime / ANSWER_TIME) * 100;
+  }, [remainingTime, isShowResult, checkAnswer]);
 
   return (
     <View style={styles.wrapper}>

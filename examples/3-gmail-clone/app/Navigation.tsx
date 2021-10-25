@@ -20,34 +20,34 @@ const MyTheme = {
 };
 
 const HomeStack = createStackNavigator();
-function HomeStackScreen() {
+const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator screenOptions={{headerShown: false}}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
       <HomeStack.Screen name="Detail" component={DetailScreen} />
     </HomeStack.Navigator>
   );
-}
+};
 
 const TrashStack = createStackNavigator();
-function TrashStackScreen() {
+const TrashStackScreen = () => {
   return (
     <TrashStack.Navigator screenOptions={{headerShown: false}}>
       <TrashStack.Screen name="Trash" component={TrashScreen} />
       <TrashStack.Screen name="Detail" component={DetailScreen} />
     </TrashStack.Navigator>
   );
-}
+};
 
 const HomeDrawer = createDrawerNavigator();
-function HomeDrawerScreen() {
+const HomeDrawerScreen = () => {
   return (
     <HomeDrawer.Navigator>
       <HomeDrawer.Screen name="Inbox" component={HomeStackScreen} />
       <HomeDrawer.Screen name="Trash" component={TrashStackScreen} />
     </HomeDrawer.Navigator>
   );
-}
+};
 
 const MainStack = createStackNavigator();
 

@@ -15,9 +15,9 @@ const EmailList: FC<EmailListProps> = ({category}) => {
   const store = useContext(StoreContext);
   const {isLoading, emails} = store;
 
-  function archiveEmail() {
+  const archiveEmail = () => {
     Alert.alert('Email was archived successfully!');
-  }
+  };
 
   if (isLoading) {
     return <Spinner />;
