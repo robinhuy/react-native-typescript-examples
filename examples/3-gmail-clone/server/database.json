@@ -26,8 +26,17 @@
     {
       "id": 1,
       "name": "Robin Huy",
+      "username": "admin",
       "email": "admin@gmail.com",
       "password": "123456",
+      "avatar": "https://avatars0.githubusercontent.com/u/12640832?s=460&u=a57e7a0a0f8f0b7740adb942e2d76e599cbd217b&v=4"
+    },
+    {
+      "id": 2,
+      "name": "Robin 2",
+      "username": "admin2",
+      "email": "admin2@gmail.com",
+      "password": "123",
       "avatar": "https://avatars0.githubusercontent.com/u/12640832?s=460&u=a57e7a0a0f8f0b7740adb942e2d76e599cbd217b&v=4"
     }
   ],
