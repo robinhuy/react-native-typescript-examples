@@ -1,6 +1,6 @@
 # React Native Typescript examples
 
-Learn React Native (with Typescript) by easy-to-difficult examples.
+Learn React Native (version 0.63 with Typescript) by easy-to-difficult examples.
 
 _For more basic examples, see [React Native Expo examples](https://github.com/robinhuy/react-native-expo-examples)_
 
