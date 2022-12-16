@@ -6,12 +6,11 @@ import {Email, User} from './models';
 
 const LOGIN_KEY = 'loginToken';
 const AVATAR_KEY = 'avatar';
-const DEFAULT_AVATAR =
-  'https://globalplatform.org/wp-content/uploads/2018/03/default-avatar.png';
+const DEFAULT_AVATAR = 'https://globalplatform.org/wp-content/uploads/2018/03/default-avatar.png';
 
 // https://github.com/infinitered/apisauce
 const api = create({
-  baseURL: 'http://192.168.1.111:3000', // Change 192.168.1.111 to your machine IP
+  baseURL: 'http://10.10.31.61:3000', // Change 192.168.1.111 to your machine IP
   headers: {'Content-Type': 'application/json'},
 });
 
@@ -31,14 +30,14 @@ class Store {
     makeAutoObservable(this);
 
     // Add authorization request header
-    api.addRequestTransform((request) => {
+    api.addRequestTransform(request => {
       if (this.token) {
         request.headers.Authorization = 'Bearer ' + this.token;
       }
     });
 
     // Handle unauthorized request
-    api.addResponseTransform((response) => {
+    api.addResponseTransform(response => {
       if (response.data === 'Unauthorized') {
         this.logout();
       }
@@ -137,13 +136,9 @@ class Store {
     }
   };
 
-  moveEmails = async (
-    fromCategory: string,
-    toCategory: string,
-    emails: Email[],
-  ) => {
+  moveEmails = async (fromCategory: string, toCategory: string, emails: Email[]) => {
     const result = await Promise.all(
-      emails.map((email) =>
+      emails.map(email =>
         api.post(`/${toCategory}`, email).then(() => {
           api.delete(`/${fromCategory}/${email.id}`);
         }),
@@ -172,7 +167,7 @@ class Store {
   };
 
   toggleStar = async (category: string, emailId: number) => {
-    this.emails = this.emails.map((email) => {
+    this.emails = this.emails.map(email => {
       if (email.id === emailId) {
         email.isStarred = !email.isStarred;
         this.updateEmail(category, email);

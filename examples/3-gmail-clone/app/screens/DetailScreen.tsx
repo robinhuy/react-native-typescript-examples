@@ -1,9 +1,9 @@
-import React, {FC, useContext} from 'react';
-import {Container} from 'native-base';
-import {WebView} from 'react-native-webview';
 import {observer} from 'mobx-react-lite';
-import {StoreContext} from '../models/Store';
+import {Box} from 'native-base';
+import React, {FC, useContext} from 'react';
+import {WebView} from 'react-native-webview';
 import ScreenHeader from '../components/ScreenHeader';
+import {StoreContext} from '../models/Store';
 
 const DetailScreen: FC = () => {
   const store = useContext(StoreContext);
@@ -17,11 +17,11 @@ const DetailScreen: FC = () => {
   const htmlContent = `<html>${headTag}<body>${emailContent}</body></html>`;
 
   return (
-    <Container>
+    <Box flex={1}>
       <ScreenHeader title="" />
 
       <WebView source={{html: htmlContent}} />
-    </Container>
+    </Box>
   );
 };
 

@@ -1,18 +1,8 @@
-import React, {FC, SetStateAction, useState, Dispatch} from 'react';
+import {Box, Button, HStack, Icon, Input, Stack, Text, View, VStack} from 'native-base';
+import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import {Keyboard, StyleSheet, TouchableOpacity} from 'react-native';
-import {
-  Button,
-  Card,
-  CardItem,
-  Col,
-  Grid,
-  Icon,
-  Input,
-  Item,
-  Text,
-  View,
-} from 'native-base';
 import MapView, {LatLng} from 'react-native-maps';
+import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import {geoCoding, GeoCodingResponse} from './googleAPI';
 
 interface ChooseLocationProps {
@@ -40,19 +30,10 @@ const ChooseLocation: FC<ChooseLocationProps> = ({
   const [suggestions, setSuggestions] = useState<GeoCodingResponse[]>([]);
 
   const suggestionItems = suggestions.map((item: GeoCodingResponse) => (
-    <TouchableOpacity
-      key={item.formatted_address}
-      onPress={() => setInputValue(item)}>
+    <TouchableOpacity key={item.formatted_address} onPress={() => setInputValue(item)}>
       <Text style={{lineHeight: 24}}>
-        <Icon
-          name="map-marker-alt"
-          type="FontAwesome5"
-          style={styles.suggestLocationIcon}
-        />
-        <Text style={styles.suggestLocationText}>
-          {' '}
-          {item.formatted_address}
-        </Text>
+        <Icon name="map-marker-alt" as={FontAwesome5} size={14} color="#777" />
+        <Text style={styles.suggestLocationText}> {item.formatted_address}</Text>
       </Text>
     </TouchableOpacity>
   ));
@@ -103,86 +84,67 @@ const ChooseLocation: FC<ChooseLocationProps> = ({
   };
 
   return (
-    <Card>
-      <CardItem>
-        <Grid>
-          <Col style={styles.colLeft}>
-            <Icon
-              name="dot-circle"
-              type="FontAwesome5"
-              style={styles.yourLocationIcon}
-            />
-            <Icon
-              name="ellipsis-v"
-              type="FontAwesome5"
-              style={styles.ellipsisIcon}
-            />
-            <Icon
-              name="map-marker-alt"
-              type="FontAwesome5"
-              style={styles.goToLocationIcon}
-            />
-          </Col>
+    <Box borderWidth={1} borderColor="#ddd" borderRadius="md" pb={4}>
+      <VStack space="4">
+        <Box px="4" pt="4">
+          <HStack w="100%">
+            <Stack direction="column" w={36} alignItems="center" justifyContent="center">
+              <Icon name="dot-circle" as={FontAwesome5} size={5} color="#3498db" />
 
-          <Col>
-            <Input
-              placeholder="Enter your location"
-              style={styles.input}
-              value={startLocation}
-              onChangeText={(value) => suggestLocation(value, 1)}
-            />
-            <Item />
-            <Input
-              placeholder="I want to go to ..."
-              style={styles.input}
-              value={endLocation}
-              onChangeText={(value) => suggestLocation(value, 2)}
-            />
-          </Col>
-        </Grid>
-      </CardItem>
+              <Icon
+                name="ellipsis-v"
+                as={FontAwesome5}
+                size={4}
+                color="#bdc3c7"
+                style={styles.ellipsisIcon}
+              />
 
-      {suggestions.length > 0 && <View style={styles.divider} />}
+              <Icon name="map-marker-alt" as={FontAwesome5} size={5} color="#e74c3c" />
+            </Stack>
 
-      {suggestions.length > 0 && <CardItem>{suggestionItems}</CardItem>}
+            <Stack direction="column" flex={1}>
+              <Input
+                placeholder="Enter your location"
+                borderWidth={0}
+                borderBottomWidth={1}
+                style={styles.input}
+                value={startLocation}
+                onChangeText={value => suggestLocation(value, 1)}
+              />
 
-      <CardItem>
-        <Button
-          block
-          style={styles.bookingButton}
-          onPress={confirm}
-          disabled={startLocation === '' || endLocation === ''}>
-          <Text>Confirm</Text>
-        </Button>
-      </CardItem>
-    </Card>
+              <Input
+                placeholder="I want to go to ..."
+                borderWidth={0}
+                style={styles.input}
+                value={endLocation}
+                onChangeText={value => suggestLocation(value, 2)}
+              />
+            </Stack>
+          </HStack>
+        </Box>
+
+        {suggestions.length > 0 && <View style={styles.divider} />}
+
+        {suggestions.length > 0 && <Box>{suggestionItems}</Box>}
+
+        <Box px="4">
+          <Button
+            style={styles.bookingButton}
+            onPress={confirm}
+            disabled={startLocation === '' || endLocation === ''}>
+            <Text color="#fff">Confirm</Text>
+          </Button>
+        </Box>
+      </VStack>
+    </Box>
   );
 };
 
 const styles = StyleSheet.create({
-  colLeft: {
-    width: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  yourLocationIcon: {
-    fontSize: 16,
-    color: '#3498db',
-  },
   ellipsisIcon: {
-    fontSize: 16,
-    color: '#bdc3c7',
-    marginLeft: 8,
+    marginLeft: 7,
     marginTop: 7,
     marginBottom: 7,
-  },
-  goToLocationIcon: {
-    fontSize: 18,
-    color: '#e74c3c',
-  },
-  suggestLocationIcon: {
-    fontSize: 14,
-    color: '#777',
   },
   suggestLocationText: {
     fontSize: 14,
@@ -191,7 +153,6 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 14,
-    borderBottomWidth: 0,
   },
   divider: {
     borderWidth: 3,

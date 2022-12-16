@@ -1,11 +1,11 @@
-import React, {FC, useCallback, useContext} from 'react';
-import {Container} from 'native-base';
-import {observer} from 'mobx-react-lite';
-import {StoreContext} from '../models/Store';
 import {useFocusEffect} from '@react-navigation/native';
+import {observer} from 'mobx-react-lite';
+import {Box} from 'native-base';
+import React, {FC, useCallback, useContext} from 'react';
+import EmailList from '../components/EmailList';
 import HeaderComponent from '../components/ScreenHeader';
 import Toolbar from '../components/Toolbar';
-import EmailList from '../components/EmailList';
+import {StoreContext} from '../models/Store';
 
 const TrashScreen: FC = () => {
   const store = useContext(StoreContext);
@@ -19,7 +19,7 @@ const TrashScreen: FC = () => {
   );
 
   return (
-    <Container>
+    <Box>
       {isShowToolbar ? (
         <Toolbar category="trashEmails" />
       ) : (
@@ -27,7 +27,7 @@ const TrashScreen: FC = () => {
       )}
 
       <EmailList category="trashEmails" />
-    </Container>
+    </Box>
   );
 };
 

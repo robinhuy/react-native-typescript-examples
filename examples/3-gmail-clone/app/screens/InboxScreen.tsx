@@ -1,11 +1,11 @@
-import React, {FC, useCallback, useContext} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
-import {Container} from 'native-base';
 import {observer} from 'mobx-react-lite';
-import {StoreContext} from '../models/Store';
+import {Box} from 'native-base';
+import React, {FC, useCallback, useContext} from 'react';
+import EmailList from '../components/EmailList';
 import ScreenHeader from '../components/ScreenHeader';
 import Toolbar from '../components/Toolbar';
-import EmailList from '../components/EmailList';
+import {StoreContext} from '../models/Store';
 
 const HomeScreen: FC = () => {
   const store = useContext(StoreContext);
@@ -20,15 +20,11 @@ const HomeScreen: FC = () => {
   );
 
   return (
-    <Container>
-      {isShowToolbar ? (
-        <Toolbar category="emails" />
-      ) : (
-        <ScreenHeader hasMenuButton title="Inbox" />
-      )}
+    <Box bgColor="#fff" flex={1}>
+      {isShowToolbar ? <Toolbar category="emails" /> : <ScreenHeader hasMenuButton title="Inbox" />}
 
       <EmailList category="emails" />
-    </Container>
+    </Box>
   );
 };
 

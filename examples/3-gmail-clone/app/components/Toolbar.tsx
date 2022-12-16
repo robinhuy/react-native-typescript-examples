@@ -1,7 +1,7 @@
+import {observer} from 'mobx-react-lite';
+import {Box, Button, Icon, Text} from 'native-base';
 import React, {FC, useContext} from 'react';
 import {Platform, StyleSheet} from 'react-native';
-import {Header, Left, Body, Right, Icon, Button, Text} from 'native-base';
-import {observer} from 'mobx-react-lite';
 import {StoreContext} from '../models/Store';
 
 interface ToolbarProps {
@@ -10,12 +10,7 @@ interface ToolbarProps {
 
 const Toolbar: FC<ToolbarProps> = ({category}) => {
   const store = useContext(StoreContext);
-  const {
-    setShowToolbar,
-    checkedEmailIds,
-    setCheckedEmailIds,
-    moveSelectedEmails,
-  } = store;
+  const {setShowToolbar, checkedEmailIds, setCheckedEmailIds, moveSelectedEmails} = store;
 
   const hideToolbar = () => {
     setShowToolbar(false);
@@ -23,33 +18,23 @@ const Toolbar: FC<ToolbarProps> = ({category}) => {
   };
 
   return (
-    <Header>
-      <Left>
-        <Button transparent onPress={hideToolbar}>
-          <Icon name="arrow-back" />
+    <Box>
+      <Button variant="unstyled" onPress={hideToolbar}>
+        <Icon name="arrow-back" />
+      </Button>
+
+      <Text style={styles.countText}>{checkedEmailIds.length}</Text>
+
+      {category === 'emails' ? (
+        <Button variant="unstyled" onPress={() => moveSelectedEmails('emails', 'trashEmails')}>
+          <Icon name="trash" />
         </Button>
-      </Left>
-
-      <Body>
-        <Text style={styles.countText}>{checkedEmailIds.length}</Text>
-      </Body>
-
-      <Right>
-        {category === 'emails' ? (
-          <Button
-            transparent
-            onPress={() => moveSelectedEmails('emails', 'trashEmails')}>
-            <Icon name="trash" />
-          </Button>
-        ) : (
-          <Button
-            transparent
-            onPress={() => moveSelectedEmails('trashEmails', 'emails')}>
-            <Icon name="mail" />
-          </Button>
-        )}
-      </Right>
-    </Header>
+      ) : (
+        <Button variant="unstyled" onPress={() => moveSelectedEmails('trashEmails', 'emails')}>
+          <Icon name="mail" />
+        </Button>
+      )}
+    </Box>
   );
 };
 

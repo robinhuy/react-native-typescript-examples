@@ -1,6 +1,6 @@
 # React Native Typescript examples
 
-Learn React Native (version 0.63 with Typescript) by easy-to-difficult examples.
+Learn React Native (version 0.70 with Typescript) by easy-to-difficult examples.
 
 _For more basic examples, see [React Native Expo examples](https://github.com/robinhuy/react-native-expo-examples)_
 
@@ -40,7 +40,7 @@ Learn how to use: **API Sauce**, **MobX + MobX React Lite**, **React Context**, 
 
 <img src="https://user-images.githubusercontent.com/12640832/102325797-2d355600-3fb6-11eb-9975-dd8849782b48.gif" width="250" alt="Gmail clone" />
 
-Note: To run this example, you must start the server ([https://github.com/robinhuy/fake-rest-api-nodejs](https://github.com/robinhuy/fake-rest-api-nodejs)) in folder `server`:
+Note: To run this example, you must start the server ([https://github.com/robinhuy/fake-api-nodejs](https://github.com/robinhuy/fake-api-nodejs)) in folder `server`:
 
 ```
   cd server

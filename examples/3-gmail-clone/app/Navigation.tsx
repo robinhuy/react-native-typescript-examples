@@ -5,10 +5,10 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import {StoreContext} from './models/Store';
 import {observer} from 'mobx-react-lite';
-import HomeScreen from './screens/HomeScreen';
+import InboxScreen from './screens/InboxScreen';
 import DetailScreen from './screens/DetailScreen';
 import TrashScreen from './screens/TrashScreen';
-import LoginScreen from './screens/login/LoginScreen';
+import LoginScreen from './screens/LoginScreen';
 import SplashScreen from './screens/SplashScreen';
 
 const MyTheme = {
@@ -23,7 +23,7 @@ const HomeStack = createStackNavigator();
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator screenOptions={{headerShown: false}}>
-      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="InboxList" component={InboxScreen} />
       <HomeStack.Screen name="Detail" component={DetailScreen} />
     </HomeStack.Navigator>
   );
@@ -33,7 +33,7 @@ const TrashStack = createStackNavigator();
 const TrashStackScreen = () => {
   return (
     <TrashStack.Navigator screenOptions={{headerShown: false}}>
-      <TrashStack.Screen name="Trash" component={TrashScreen} />
+      <TrashStack.Screen name="TrashList" component={TrashScreen} />
       <TrashStack.Screen name="Detail" component={DetailScreen} />
     </TrashStack.Navigator>
   );
@@ -42,7 +42,7 @@ const TrashStackScreen = () => {
 const HomeDrawer = createDrawerNavigator();
 const HomeDrawerScreen = () => {
   return (
-    <HomeDrawer.Navigator>
+    <HomeDrawer.Navigator screenOptions={{headerShown: false}}>
       <HomeDrawer.Screen name="Inbox" component={HomeStackScreen} />
       <HomeDrawer.Screen name="Trash" component={TrashStackScreen} />
     </HomeDrawer.Navigator>

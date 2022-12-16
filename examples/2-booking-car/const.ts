@@ -15,5 +15,4 @@ export const initialRegion: Region = {
   longitudeDelta: 0.01,
 };
 
-export const initialLocation: string =
-  '48 Tố Hữu, Trung Văn, Từ Liêm, Hà Nội, Vietnam';
+export const initialLocation: string = 'Hà Nội, Vietnam';

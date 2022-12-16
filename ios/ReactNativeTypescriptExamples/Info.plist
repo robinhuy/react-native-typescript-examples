@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>ReactNativeTypescriptExamples</string>
+	<string>ReactNativeTypeScriptExamples</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,8 +26,6 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
@@ -61,8 +59,8 @@
 		<string>Ionicons.ttf</string>
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
-    <string>Get your location to booking car</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Get your location to booking car</string>
+  <string>Get your location to booking car</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Get your location to booking car</string>
 </dict>
 </plist>

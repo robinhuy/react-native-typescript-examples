@@ -1,10 +1,11 @@
-import React, {FC, useContext} from 'react';
-import {Platform, StyleSheet, TouchableOpacity} from 'react-native';
-import {ListItem, Left, Body, Right, CheckBox, Text, Icon} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import {observer} from 'mobx-react-lite';
-import {StoreContext} from '../models/Store';
+import {Box, Checkbox, HStack, Icon, Text} from 'native-base';
+import React, {FC, useContext} from 'react';
+import {TouchableOpacity} from 'react-native';
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import {Email} from '../models/models';
+import {StoreContext} from '../models/Store';
 
 interface EmailListItemProps {
   item: Email;
@@ -15,6 +16,7 @@ const EmailListItem: FC<EmailListItemProps> = ({item, category}) => {
   const navigation = useNavigation();
   const store = useContext(StoreContext);
   const {checkedEmailIds, checkEmail, toggleStar, setEmailContent} = store;
+  const isChecked = checkedEmailIds.includes(item.id);
 
   const goToDetailScreen = () => {
     setEmailContent(item.content);
@@ -22,64 +24,44 @@ const EmailListItem: FC<EmailListItemProps> = ({item, category}) => {
   };
 
   return (
-    <ListItem noIndent style={{backgroundColor: '#fff'}}>
-      <Left style={styles.left}>
-        <CheckBox
-          checked={checkedEmailIds.includes(item.id)}
-          onPress={() => checkEmail(item.id)}
-          style={
-            Platform.OS === 'android'
-              ? styles.checkBoxAndroid
-              : styles.checkBoxIos
-          }
+    <HStack
+      justifyContent="space-between"
+      alignItems="center"
+      paddingX={5}
+      paddingY={3}
+      bgColor="#fff"
+      borderColor="#eee"
+      borderBottomWidth={1}>
+      <Box w={8}>
+        <Checkbox
+          accessibilityLabel={isChecked ? 'Checked' : 'Check'}
+          isChecked={isChecked}
+          value=""
+          onChange={() => checkEmail(item.id)}
         />
-      </Left>
+      </Box>
 
-      <Body style={styles.body}>
+      <Box flex={1} paddingRight={4}>
         <TouchableOpacity onPress={goToDetailScreen}>
-          <Text style={{marginBottom: 5}}>{item.sender}</Text>
-          <Text note>{item.title}</Text>
+          <Text mb={1} bold>
+            {item.sender}
+          </Text>
+          <Text>{item.title}</Text>
         </TouchableOpacity>
-      </Body>
+      </Box>
 
-      <Right style={styles.right}>
-        <Text note>{item.time}</Text>
+      <Box alignItems="center">
+        <Text>{item.time}</Text>
         <Icon
           name={item.isStarred ? 'star' : 'star-outline'}
-          style={[
-            styles.starIcon,
-            {color: item.isStarred ? '#ffd153' : '#e2e2e2'},
-          ]}
+          as={Ionicons}
+          size={22}
+          color={item.isStarred ? '#ffd153' : '#e2e2e2'}
           onPress={() => toggleStar(category, item.id)}
         />
-      </Right>
-    </ListItem>
+      </Box>
+    </HStack>
   );
 };
-
-const styles = StyleSheet.create({
-  left: {
-    flex: 1,
-  },
-  body: {
-    flex: 10,
-  },
-  right: {
-    flex: 3,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  checkBoxAndroid: {
-    left: 3,
-    paddingLeft: 0,
-  },
-  checkBoxIos: {
-    left: 0,
-  },
-  starIcon: {
-    fontSize: 26,
-    marginTop: 4,
-  },
-});
 
 export default observer(EmailListItem);

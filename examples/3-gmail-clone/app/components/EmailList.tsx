@@ -1,10 +1,11 @@
+import {observer} from 'mobx-react-lite';
+import {Box, HStack, Icon, Spinner, Text} from 'native-base';
 import React, {FC, useContext} from 'react';
 import {Alert, StyleSheet, TouchableOpacity} from 'react-native';
-import {Icon, View, Text, Spinner} from 'native-base';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import {observer} from 'mobx-react-lite';
-import {StoreContext} from '../models/Store';
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import {Email} from '../models/models';
+import {StoreContext} from '../models/Store';
 import EmailListItem from './EmailListItem';
 
 interface EmailListProps {
@@ -20,37 +21,35 @@ const EmailList: FC<EmailListProps> = ({category}) => {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <Box flex={1} alignItems="center" justifyContent="center">
+        <Spinner />
+      </Box>
+    );
   }
 
   if (emails.length === 0) {
     return (
-      <View style={{padding: 15}}>
+      <Box padding={15}>
         <Text>No email in the box!</Text>
-      </View>
+      </Box>
     );
   }
 
   return (
     <SwipeListView
       data={store.emails}
-      renderItem={(data) => (
-        <EmailListItem item={data.item} category={category} />
-      )}
+      renderItem={data => <EmailListItem item={data.item} category={category} />}
       renderHiddenItem={() => (
-        <View style={styles.swipeListHiddenItem}>
-          <TouchableOpacity
-            style={styles.swipeListHiddenIconWrapper}
-            onPress={archiveEmail}>
-            <Icon name="archive" style={styles.swipeListHiddenIcon} />
+        <HStack justifyContent="space-between" alignItems="center" h="100%" bgColor="green.500">
+          <TouchableOpacity style={styles.swipeListHiddenIconWrapper} onPress={archiveEmail}>
+            <Icon name="archive" color="#fff" size={30} as={Ionicons} />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.swipeListHiddenIconWrapper}
-            onPress={archiveEmail}>
-            <Icon name="archive" style={styles.swipeListHiddenIcon} />
+          <TouchableOpacity style={styles.swipeListHiddenIconWrapper} onPress={archiveEmail}>
+            <Icon name="archive" color="#fff" size={30} as={Ionicons} />
           </TouchableOpacity>
-        </View>
+        </HStack>
       )}
       keyExtractor={(item: Email) => item.id?.toString()}
       leftOpenValue={75}
@@ -60,12 +59,6 @@ const EmailList: FC<EmailListProps> = ({category}) => {
 };
 
 const styles = StyleSheet.create({
-  swipeListHiddenItem: {
-    backgroundColor: 'green',
-    height: '100%',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
   swipeListHiddenIconWrapper: {
     width: 75,
     justifyContent: 'center',
