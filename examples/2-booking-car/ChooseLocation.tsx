@@ -84,7 +84,7 @@ const ChooseLocation: FC<ChooseLocationProps> = ({
   };
 
   return (
-    <Box borderWidth={1} borderColor="#ddd" borderRadius="md" pb={4}>
+    <Box borderWidth={1} borderColor="#ddd" bgColor="#fff" borderRadius="md" pb={4}>
       <VStack space="4">
         <Box px="4" pt="4">
           <HStack w="100%">
